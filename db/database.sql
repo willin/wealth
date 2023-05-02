@@ -6,7 +6,7 @@ CREATE TABLE `invoices`  (
   `amount` decimal(12, 2) NOT NULL DEFAULT 0,
   `method` varchar(32) NOT NULL DEFAULT '',
   `desc` varchar(64) NOT NULL DEFAULT '',
-  `note` varchar(255) NOT NULL,
+  `note` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   INDEX(`type`),
   INDEX(`date`),

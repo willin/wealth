@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-import { i18n } from './i18n-config';
-
 import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
+import { i18n } from './i18n-config';
 
 function getLocale(request: NextRequest): string {
   // Negotiator expects plain object so we need to transform headers
@@ -49,5 +47,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.|robots.txt|ads.txt|images/).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.|robots.txt|ads.txt|sitemap|images/).*)']
 };

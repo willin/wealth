@@ -8,7 +8,9 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
   const t = await translation(lang);
   const session = await getServerSession(authOptions);
   if (!session) {
-    return <Error lang={lang} goBack={t('error.go_back')} forbidden={t('error.forbidden')} />;
+    return (
+      <Error lang={lang} goBack={t('common.go_back')} forbidden={t('common.forbidden')} login={t('common.login')} />
+    );
   }
 
   return (

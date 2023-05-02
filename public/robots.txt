@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-User-agent: *
-Disallow: /images/
-
-Sitemap: https://willin.wang/sitemap.xml

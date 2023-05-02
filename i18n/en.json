@@ -35,7 +35,8 @@
     "BANK": "Bank Account",
     "OTHERS": "Others"
   },
-  "error": {
+  "common": {
+    "login": "Sign In",
     "forbidden": "Forbidden",
     "go_back": "Go Back"
   }
