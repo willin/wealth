@@ -21,7 +21,8 @@
     "react-dom": "18.2.0",
     "server-only": "^0.0.1",
     "sqlstring": "^2.3.3",
-    "templite": "^1.2.0"
+    "templite": "^1.2.0",
+    "theme-change": "^2.5.0"
   },
   "devDependencies": {
     "@types/dlv": "^1.1.2",
@@ -33,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.44.0",
     "autoprefixer": "10.4.14",
+    "daisyui": "^2.51.6",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "eslint-config-prettier": "^8.5.0",

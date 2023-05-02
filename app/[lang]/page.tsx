@@ -1,6 +1,7 @@
 import { SignIn } from '@/components/action';
 import { Locale } from '@/i18n-config';
 import { translation } from '@/lib/i18n';
+import { ThemeChange } from './themes';
 
 export default async function Home({ params: { lang } }: { params: { lang: Locale } }) {
   const t = await translation(lang);
@@ -12,6 +13,7 @@ export default async function Home({ params: { lang } }: { params: { lang: Local
           Get started by editing&nbsp;
           <code className='font-mono font-bold'>{t('invoice.date')}</code>
           <SignIn />
+          <ThemeChange />
         </p>
       </div>
 

@@ -1,12 +1,10 @@
 import './globals.css';
 import { i18n } from '@/i18n-config';
-import { Inter } from 'next/font/google';
+import { BackgroundImage } from './background';
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,7 +14,11 @@ export const metadata = {
 export default function RootLayout({ children, params }: { children: React.ReactNode; params: { lang: string } }) {
   return (
     <html lang={params.lang}>
-      <body className={inter.className}>{children}</body>
+      <head />
+      <body>
+        <BackgroundImage />
+        <div>{children}</div>
+      </body>
     </html>
   );
 }
