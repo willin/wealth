@@ -20,3 +20,5 @@ export default function RootLayout({ children, params }: { children: React.React
     </html>
   );
 }
+
+export const revalidate = 3600;

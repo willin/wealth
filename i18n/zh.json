@@ -1,3 +1,42 @@
 {
-  "hello": "你好"
+  "invoice": {
+    "date": "日期",
+    "category": "分类",
+    "amount": "金额",
+    "method": "支付方式",
+    "desc": "项目说明",
+    "note": "备注"
+  },
+  "type": {
+    "IN": "收入",
+    "OUT": "支出"
+  },
+  "category": {
+    "MARJOR": "主业收入",
+    "SIDE": "副业收入",
+    "INVEST": "投资理财",
+    "DONATE": "红包打赏",
+    "OTHERS": "其他",
+    "FOOD": "餐饮美食",
+    "GAME": "休闲娱乐",
+    "STUDY": "学习提升",
+    "TRAFFIC": "交通出行",
+    "RECHARGE": "充值缴费",
+    "DIGITAL": "数码电器",
+    "CLOTHES": "服饰装扮",
+    "DAILY": "日用百货",
+    "FAMILY": "家庭",
+    "MEDICAL": "医疗健康"
+  },
+  "method": {
+    "ALIPAY": "支付宝",
+    "WECHAT": "微信",
+    "CREDIT": "信用卡",
+    "BANK": "银行账户",
+    "OTHERS": "其他"
+  },
+  "error": {
+    "forbidden": "禁止访问",
+    "go_back": "返回"
+  }
 }

@@ -14,7 +14,6 @@
     "@formatjs/intl-localematcher": "^0.2.32",
     "@planetscale/database": "^1.7.0",
     "dlv": "^1.1.3",
-    "nanoid": "^4.0.2",
     "negotiator": "^0.6.3",
     "next": "13.3.1",
     "next-auth": "^4.22.1",

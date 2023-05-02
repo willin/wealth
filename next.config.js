@@ -2,8 +2,9 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    runtime: "experimental-edge",
-  },
+    runtime: 'experimental-edge',
+    serverComponentsExternalPackages: ['@planetscale/database']
+  }
 };
 
 module.exports = nextConfig;

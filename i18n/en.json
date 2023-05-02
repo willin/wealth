@@ -1,3 +1,42 @@
 {
-  "hello": "Hello"
+  "invoice": {
+    "date": "Date",
+    "category": "Category",
+    "amount": "Amount",
+    "method": "Payment Method",
+    "desc": "Description",
+    "note": "Remark"
+  },
+  "type": {
+    "IN": "Income",
+    "OUT": "Expenditure"
+  },
+  "category": {
+    "MARJOR": "Major",
+    "SIDE": "Sideline",
+    "INVEST": "Investment",
+    "DONATE": "Donation",
+    "OTHERS": "Others",
+    "FOOD": "Food",
+    "GAME": "Entertainment",
+    "STUDY": "Knowledge",
+    "TRAFFIC": "Traffic",
+    "RECHARGE": "Recharge",
+    "DIGITAL": "Digital",
+    "CLOTHES": "Clothes",
+    "DAILY": "Daily",
+    "FAMILY": "Family",
+    "MEDICAL": "Medical"
+  },
+  "method": {
+    "ALIPAY": "Alipay",
+    "WECHAT": "Wechat Pay",
+    "CREDIT": "Credit Card",
+    "BANK": "Bank Account",
+    "OTHERS": "Others"
+  },
+  "error": {
+    "forbidden": "Forbidden",
+    "go_back": "Go Back"
+  }
 }

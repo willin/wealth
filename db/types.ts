@@ -1,65 +1,73 @@
+export enum InvoiceInCategory {
+  // 主业
+  MAJOR = 'MAJOR',
+  // 副业
+  SDIE = 'SIDE',
+  // 投资理财
+  INVEST = 'INVEST',
+  // 红包打赏
+  DONATE = 'DONATE',
+  // 其他
+  OTHERS = 'OTHERS'
+}
+
+export enum InvoiceOutCategory {
+  // 餐饮
+  FOOD = 'FOOD',
+  // 娱乐
+  GAME = 'GAME',
+  // 学习提升
+  STUDY = 'STUDY',
+  // 交通
+  TRAFFIC = 'TRAFFIC',
+  // 充值
+  RECHARGE = 'RECHARGE',
+  // 数码
+  DIGITAL = 'DIGITAL',
+  // 服饰
+  CLOTHES = 'CLOTHES',
+  // 日用
+  DAILY = 'DAILY',
+  // 家庭
+  FAMILY = 'FAMILY',
+  // 医疗
+  MEDICAL = 'MEDICAL',
+  // 红包打赏
+  DONATE = 'DONATE',
+  // 其他
+  OTHERS = 'OTHERS'
+}
+
+export enum InvoiceMethod {
+  // 支付宝
+  ALIPAY = 'ALIPAY',
+  // 微信
+  WECHAT = 'WECHAT',
+  // 信用卡
+  CREDIT = 'CREDIT',
+  // 银行卡
+  BANK = 'BANK',
+  // 其他账户
+  OTHERS = 'OTHERS'
+}
+
+export enum InvoiceType {
+  IN = 'IN',
+  OUT = 'OUT'
+}
+
 export enum OrderDirection {
   ASC = 'ASC',
   DESC = 'DESC'
 }
 
-export enum PaidType {
-  ONCE = 'ONCE',
-  SUBCRIBE = 'SUBCRIBE'
-}
-
-export enum PaymentMethod {
-  PAYPAL = 'PAYPAL'
-}
-
-export interface Package {
-  uid: number;
-  npm: string;
-  // 100 = 1.00 USD
-  price: number;
-  type: PaidType;
-  created_at: number;
-  updated_at: number;
-}
-
-export enum OrderStatus {
-  CREATED = 'CREATED',
-  PAID = 'PAID',
-  CANCELED = 'CANCELED',
-  CLOSED = 'CLOSED'
-}
-
-export interface Order {
-  oid: string;
-  uid: number;
-  npm: string;
-  // 100 = 1.00 USD
-  fee: number;
-  // 0: forever, or N months
+export interface Invoice {
+  id: number;
+  type: InvoiceType;
+  date: Date;
+  category: InvoiceInCategory | InvoiceOutCategory;
   amount: number;
-  method: PaymentMethod;
-  status: OrderStatus;
-  token: string;
-  created_at: number;
-  updated_at: number;
-}
-
-export interface Token {
-  token: string;
-  uid: number;
-  npm: string;
-  // 0: forever, 1: disabled, or unix timestamp
-  expired_at: number;
-  created_at: number;
-  updated_at: number;
-}
-
-export interface User {
-  uid: number;
-  username: string;
-  email: string;
-  // 100 = 1.00 USD
-  balance: number;
-  created_at: number;
-  updated_at: number;
+  method: InvoiceMethod;
+  desc: string;
+  note: string;
 }
