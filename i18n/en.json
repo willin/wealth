@@ -36,6 +36,8 @@
     "OTHERS": "Others"
   },
   "common": {
+    "operation": "Operation",
+    "all": "All",
     "login": "Sign In",
     "forbidden": "Forbidden",
     "go_back": "Go Back"

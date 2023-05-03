@@ -17,7 +17,7 @@ export default function RootLayout({ children, params }: { children: React.React
       <head />
       <body>
         <BackgroundImage />
-        <div>{children}</div>
+        <div className='container mx-auto shadow bg-neutral/70'>{children}</div>
       </body>
     </html>
   );
