@@ -1,55 +1,55 @@
-export enum InvoiceInCategory {
+export const InvoiceInCategory = [
   // 主业
-  MAJOR = 'MAJOR',
+  'MAJOR',
   // 副业
-  SDIE = 'SIDE',
+  'SIDE',
   // 投资理财
-  INVEST = 'INVEST',
+  'INVEST',
   // 红包打赏
-  DONATE = 'DONATE',
+  'DONATE',
   // 其他
-  OTHERS = 'OTHERS'
-}
+  'OTHERS'
+] as const;
 
-export enum InvoiceOutCategory {
+export const InvoiceOutCategory = [
   // 餐饮
-  FOOD = 'FOOD',
+  'FOOD',
   // 娱乐
-  GAME = 'GAME',
+  'GAME',
   // 学习提升
-  STUDY = 'STUDY',
+  'STUDY',
   // 交通
-  TRAFFIC = 'TRAFFIC',
+  'TRAFFIC',
   // 充值
-  RECHARGE = 'RECHARGE',
+  'RECHARGE',
   // 数码
-  DIGITAL = 'DIGITAL',
+  'DIGITAL',
   // 服饰
-  CLOTHES = 'CLOTHES',
+  'CLOTHES',
   // 日用
-  DAILY = 'DAILY',
+  'DAILY',
   // 家庭
-  FAMILY = 'FAMILY',
+  'FAMILY',
   // 医疗
-  MEDICAL = 'MEDICAL',
+  'MEDICAL',
   // 红包打赏
-  DONATE = 'DONATE',
+  'DONATE',
   // 其他
-  OTHERS = 'OTHERS'
-}
+  'OTHERS'
+] as const;
 
-export enum InvoiceMethod {
+export const InvoiceMethod = [
   // 支付宝
-  ALIPAY = 'ALIPAY',
+  'ALIPAY',
   // 微信
-  WECHAT = 'WECHAT',
+  'WECHAT',
   // 信用卡
-  CREDIT = 'CREDIT',
+  'CREDIT',
   // 银行卡
-  BANK = 'BANK',
+  'BANK',
   // 其他账户
-  OTHERS = 'OTHERS'
-}
+  'OTHERS'
+] as const;
 
 export enum InvoiceType {
   IN = 'IN',
@@ -70,11 +70,11 @@ export interface Pagination {
 
 export interface Invoice {
   id: number;
-  type: InvoiceType;
+  type: string;
   date: Date;
-  category: InvoiceInCategory | InvoiceOutCategory;
+  category: string;
   amount: number;
-  method: InvoiceMethod;
+  method: string;
   desc: string;
   note: string;
 }

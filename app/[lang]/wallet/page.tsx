@@ -7,6 +7,7 @@ import { Invoice, InvoiceType, Pagination } from '@/db/types';
 import { countInvoices, getInvoices } from '@/db/invoices';
 import Error from './error';
 import { FilterType } from './filters';
+import Link from 'next/link';
 
 export const revalidate = 60;
 
@@ -40,7 +41,11 @@ export default async function Page({
       <table className='table table-compact table-zebra w-full max-w-full mx-auto'>
         <thead>
           <tr>
-            <th></th>
+            <th>
+              <Link href='/wallet/create' className='btn'>
+                +
+              </Link>
+            </th>
             <th>{t('invoice.date')}</th>
             <th>{t('invoice.amount')}</th>
             <th>{t('invoice.category')}</th>
@@ -54,7 +59,7 @@ export default async function Page({
           {list.map((item) => (
             <tr key={item.id} className='hover'>
               <th>{item.id}</th>
-              <td>{item.date.toDateString()}</td>
+              <td>{item.date as any as string}</td>
               <td>
                 <span
                   className={clsx({
@@ -65,9 +70,13 @@ export default async function Page({
                   {item.amount}
                 </span>
               </td>
-              <td>{item.category}</td>
-              <td>{item.method}</td>
-              <th>编辑</th>
+              <td>{t(`category.${item.category}`)}</td>
+              <td>{t(`method.${item.method}`)}</td>
+              <th>
+                <Link href={`/wallet/${item.id}`} className='btn-link'>
+                  {t('common.edit')}
+                </Link>
+              </th>
               <td>{item.desc}</td>
               <td>{item.note}</td>
             </tr>

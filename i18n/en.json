@@ -37,6 +37,7 @@
   },
   "common": {
     "operation": "Operation",
+    "edit": "Edit",
     "all": "All",
     "login": "Sign In",
     "forbidden": "Forbidden",
