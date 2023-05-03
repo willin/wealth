@@ -32,4 +32,4 @@ export function catchServerError<T = any>(defaultValue: T) {
   };
 }
 
-export type ContextParams = { params: { [k: string]: string } };
+export type ApiContextParams = { params: { [k: string]: string } };

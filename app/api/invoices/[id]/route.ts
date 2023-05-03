@@ -1,9 +1,9 @@
-import { type ContextParams, checkAuth, catchServerError } from '@/app/api/server';
+import { type ApiContextParams, checkAuth, catchServerError } from '@/app/api/server';
 import { updateInvoice, getInvoice } from '@/db/invoices';
 import { Invoice } from '@/db/types';
 import { NextResponse } from 'next/server';
 
-async function getHandler(request: Request, { params: { id } }: ContextParams) {
+async function getHandler(request: Request, { params: { id } }: ApiContextParams) {
   const forbidden = await checkAuth();
   if (forbidden) return forbidden;
   const data = await getInvoice({
@@ -13,7 +13,7 @@ async function getHandler(request: Request, { params: { id } }: ContextParams) {
   return NextResponse.json({ data });
 }
 
-async function updateHandler(request: Request, { params: { id } }: ContextParams) {
+async function updateHandler(request: Request, { params: { id } }: ApiContextParams) {
   const forbidden = await checkAuth();
   if (forbidden) return forbidden;
   const body: Partial<Invoice> = await request.json();
@@ -24,7 +24,7 @@ async function updateHandler(request: Request, { params: { id } }: ContextParams
   return NextResponse.json({ success });
 }
 
-async function deleteHandler(request: Request, { params: { id } }: ContextParams) {
+async function deleteHandler(request: Request, { params: { id } }: ApiContextParams) {
   const forbidden = await checkAuth();
   if (forbidden) return forbidden;
   const success = await updateInvoice({

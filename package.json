@@ -23,6 +23,7 @@
     "react": "18.2.0",
     "react-date-picker": "^10.0.3",
     "react-dom": "18.2.0",
+    "recharts": "^2.5.0",
     "server-only": "^0.0.1",
     "sqlstring": "^2.3.3",
     "templite": "^1.2.0",
