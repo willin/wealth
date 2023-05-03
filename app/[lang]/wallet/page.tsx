@@ -56,8 +56,8 @@ export default async function Page({
               <td>
                 <span
                   className={clsx({
-                    'text-green-600': item.type === InvoiceType.IN,
-                    'text-red-600': item.type === InvoiceType.OUT
+                    'text-primary': item.type === InvoiceType.IN,
+                    'text-secondary': item.type === InvoiceType.OUT
                   })}>
                   ￥{item.type === InvoiceType.OUT ? '-' : ''}
                   {item.amount}
@@ -66,7 +66,7 @@ export default async function Page({
               <td>{t(`category.${item.category}`)}</td>
               <td>{t(`method.${item.method}`)}</td>
               <th>
-                <Link href={`/wallet/${item.id!}`} className='btn-link'>
+                <Link href={`/wallet/${item.id!}`} className='btn-link text-info'>
                   {t('common.edit')}
                 </Link>
               </th>

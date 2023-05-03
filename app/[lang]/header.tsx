@@ -8,7 +8,7 @@ import { LanguageChange } from './languages';
 
 export function MainHeader() {
   return (
-    <header className='sticky flex justify-center w-full z-20 opacity-90 hover:opacity-100 bg-base-100 mb-10'>
+    <header className='sticky flex justify-center w-full z-20 opacity-90 hover:opacity-100 bg-base-100 mb-4'>
       <div className='w-full max-w-screen-2xl navbar'>
         <div className='navbar-start'>
           <div className='flex-1 px-2 mx-2 font-bold'>
