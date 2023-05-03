@@ -25,7 +25,6 @@
     "react-dom": "18.2.0",
     "server-only": "^0.0.1",
     "sqlstring": "^2.3.3",
-    "swr": "^2.1.5",
     "templite": "^1.2.0",
     "theme-change": "^2.5.0"
   },

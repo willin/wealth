@@ -12,7 +12,6 @@ export const getInvoice = cache(async (params: Partial<Invoice>) => {
 
 export const getInvoices = cache(async (params: Partial<Invoice> & Pagination) => {
   const { limit, page, order, direction } = getPaginator(params);
-  const { category, type } = params;
   const sql = `SELECT * FROM invoices WHERE 1 = 1 ${buildSqlSearch(params)} ORDER BY ${escapeId(
     order
   )} ${direction} LIMIT :limit OFFSET :offset`;

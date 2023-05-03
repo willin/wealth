@@ -18,6 +18,7 @@ export default async function Page({
 }) {
   const t = await translation(lang);
 
+  // eslint-disable-next-line no-unused-vars
   const [count, list] = await Promise.all([countInvoices(searchParams), getInvoices(searchParams)]);
 
   return (
@@ -65,7 +66,7 @@ export default async function Page({
               <td>{t(`category.${item.category}`)}</td>
               <td>{t(`method.${item.method}`)}</td>
               <th>
-                <Link href={`/wallet/${item.id}`} className='btn-link'>
+                <Link href={`/wallet/${item.id!}`} className='btn-link'>
                   {t('common.edit')}
                 </Link>
               </th>

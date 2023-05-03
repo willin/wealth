@@ -6,7 +6,6 @@ import { BaseURL } from '@/lib/config';
 import dayjs from 'dayjs';
 import clsx from 'classnames';
 import { useEffect, useState } from 'react';
-import useSWR from 'swr';
 import DatePicker from 'react-date-picker';
 
 async function fetcher<JSON = any>(input: RequestInfo, init?: RequestInit): Promise<JSON> {
@@ -49,6 +48,7 @@ export default function Form({
         setLoading(false);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeItemFields = (e: React.ChangeEvent<HTMLElement>) => {
@@ -64,6 +64,7 @@ export default function Form({
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    // eslint-disable-next-line no-unused-vars
     const { id: _id, ...body } = item;
     const { success } = await fetcher(`/api/invoices${id ? `/${id}` : ''}`, {
       method: 'POST',
