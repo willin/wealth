@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { translation } from '@/lib/i18n';
 import { Locale } from '@/i18n-config';
 import Error from './error';
+import { Logout } from './logout';
 
 export default async function AdminLayout({
   params: { lang },
@@ -18,5 +19,10 @@ export default async function AdminLayout({
       <Error lang={lang} goBack={t('common.go_back')} forbidden={t('common.forbidden')} login={t('common.login')} />
     );
   }
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <Logout />
+    </>
+  );
 }
