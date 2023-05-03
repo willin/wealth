@@ -1,4 +1,4 @@
-import { type ContextParams, checkAuth } from '@/app/api/server';
+import { type ContextParams, checkAuth, catchServerError } from '@/app/api/server';
 import { updateInvoice, getInvoice } from '@/db/invoices';
 import { Invoice } from '@/db/types';
 import { NextResponse } from 'next/server';
@@ -6,11 +6,11 @@ import { NextResponse } from 'next/server';
 async function getHandler(request: Request, { params: { id } }: ContextParams) {
   const forbidden = await checkAuth();
   if (forbidden) return forbidden;
-  const result = await getInvoice({
+  const data = await getInvoice({
     id: +id
   });
-  if (!result) return NextResponse.json({ status: 404 }, { status: 404 });
-  return NextResponse.json(result);
+  if (!data) return NextResponse.json({ status: 404 }, { status: 404 });
+  return NextResponse.json({ data });
 }
 
 async function updateHandler(request: Request, { params: { id } }: ContextParams) {
@@ -20,10 +20,7 @@ async function updateHandler(request: Request, { params: { id } }: ContextParams
   const success = await updateInvoice({
     ...body,
     id: +id
-  }).catch((e) => {
-    console.error(e);
-    return false;
-  });
+  }).catch(catchServerError(false));
   return NextResponse.json({ success });
 }
 

@@ -61,6 +61,13 @@ export enum OrderDirection {
   DESC = 'DESC'
 }
 
+export interface Pagination {
+  limit: number;
+  page: number;
+  order: string;
+  direction: OrderDirection;
+}
+
 export interface Invoice {
   id: number;
   type: InvoiceType;
@@ -71,3 +78,5 @@ export interface Invoice {
   desc: string;
   note: string;
 }
+
+export const InvoiceIndexes = ['date', 'type', 'category', 'amount', 'id'];
