@@ -3,12 +3,14 @@ import { i18n } from '@/i18n-config';
 import { BackgroundImage } from './background';
 import { MainHeader } from './header';
 import { ContextParams } from './context';
+import { Metadata } from 'next';
+import { BaseURL } from '@/lib/config';
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: 'Willin Wang 长岛冰泪',
     template: '%s | Willin Wang 长岛冰泪'
@@ -19,6 +21,24 @@ export const metadata = {
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.ico'
+  },
+  appleWebApp: {
+    capable: true,
+    title: '$Willin$',
+    statusBarStyle: 'black-translucent'
+  },
+  appLinks: {
+    web: {
+      url: BaseURL,
+      should_fallback: true
+    }
+  },
+  alternates: {
+    canonical: BaseURL,
+    languages: {
+      'en-US': `${BaseURL}/en`,
+      'zh-CN': `${BaseURL}/zh`
+    }
   }
 };
 
