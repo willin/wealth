@@ -12,7 +12,7 @@
     "OUT": "Expenditure"
   },
   "category": {
-    "MARJOR": "Major",
+    "MAJOR": "Major",
     "SIDE": "Sideline",
     "INVEST": "Investment",
     "DONATE": "Donation",

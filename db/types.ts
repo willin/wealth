@@ -9,7 +9,7 @@ export const InvoiceInCategory = [
   'DONATE',
   // 其他
   'OTHERS'
-] as const;
+];
 
 export const InvoiceOutCategory = [
   // 餐饮
@@ -36,7 +36,7 @@ export const InvoiceOutCategory = [
   'DONATE',
   // 其他
   'OTHERS'
-] as const;
+];
 
 export const InvoiceMethod = [
   // 支付宝
@@ -49,7 +49,7 @@ export const InvoiceMethod = [
   'BANK',
   // 其他账户
   'OTHERS'
-] as const;
+];
 
 export enum InvoiceType {
   IN = 'IN',
@@ -69,9 +69,9 @@ export interface Pagination {
 }
 
 export interface Invoice {
-  id: number;
+  id?: number;
   type: string;
-  date: Date;
+  date: Date | string;
   category: string;
   amount: number;
   method: string;

@@ -12,7 +12,7 @@
     "OUT": "支出"
   },
   "category": {
-    "MARJOR": "主业收入",
+    "MAJOR": "主业收入",
     "SIDE": "副业收入",
     "INVEST": "投资理财",
     "DONATE": "红包打赏",

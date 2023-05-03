@@ -1,13 +1,11 @@
 import clsx from 'classnames';
 import { Locale } from '@/i18n-config';
 import { translation } from '@/lib/i18n';
-import { authOptions } from '@/lib/next-auth';
-import { getServerSession } from 'next-auth';
 import { Invoice, InvoiceType, Pagination } from '@/db/types';
 import { countInvoices, getInvoices } from '@/db/invoices';
-import Error from './error';
 import { FilterType } from './filters';
 import Link from 'next/link';
+import dayjs from 'dayjs';
 
 export const revalidate = 60;
 
@@ -19,12 +17,6 @@ export default async function Page({
   searchParams: Partial<Invoice> & Pagination;
 }) {
   const t = await translation(lang);
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return (
-      <Error lang={lang} goBack={t('common.go_back')} forbidden={t('common.forbidden')} login={t('common.login')} />
-    );
-  }
 
   const [count, list] = await Promise.all([countInvoices(searchParams), getInvoices(searchParams)]);
 
@@ -59,7 +51,7 @@ export default async function Page({
           {list.map((item) => (
             <tr key={item.id} className='hover'>
               <th>{item.id}</th>
-              <td>{item.date as any as string}</td>
+              <td>{dayjs(item.date).format('YYYY-MM-DD')}</td>
               <td>
                 <span
                   className={clsx({

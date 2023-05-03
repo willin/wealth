@@ -1,11 +1,16 @@
+import { authOptions } from '@/lib/next-auth';
 import { getServerSession } from 'next-auth';
 import { translation } from '@/lib/i18n';
 import { Locale } from '@/i18n-config';
-import { authOptions } from '@/lib/next-auth';
-import Form from '../form';
-import Error from '../error';
+import Error from './error';
 
-export default async function Page({ params: { lang } }: { params: { lang: Locale } }) {
+export default async function AdminLayout({
+  params: { lang },
+  children
+}: {
+  params: { lang: Locale };
+  children: React.ReactNode;
+}) {
   const t = await translation(lang);
   const session = await getServerSession(authOptions);
   if (!session) {
@@ -13,5 +18,5 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
       <Error lang={lang} goBack={t('common.go_back')} forbidden={t('common.forbidden')} login={t('common.login')} />
     );
   }
-  return <Form />;
+  return <>{children}</>;
 }
