@@ -9,6 +9,19 @@ import { useParams } from 'next/navigation';
 import { Invoice, InvoiceType } from '@/db/types';
 import { formatMoney } from '@/app/[lang]/helper';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+function useWindowWidth() {
+  const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth);
+
+  useEffect(() => {
+    const onResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  return width;
+}
 
 const monthTickFormatter = (tick: string) => {
   const date = new Date(tick);
@@ -28,7 +41,7 @@ const renderQuarterTick = (tickProps: { x: number; y: number; payload: { value: 
     return <text x={x} y={y - 4} textAnchor='middle' fill='currentcolor'>{`Q${quarterNo}`}</text>;
   }
 
-  const isLast = month === 11;
+  const isLast = month === 12;
 
   if (month % 3 === 0 || isLast) {
     const pathX = Math.floor(isLast ? x + offset : x - offset) + 0.5;
@@ -40,6 +53,7 @@ const renderQuarterTick = (tickProps: { x: number; y: number; payload: { value: 
 
 export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: string } }) {
   const params = useParams();
+  const width = useWindowWidth();
   dayjs.locale(params.lang);
   const year = +params.year;
   const grids = new Array(12).fill(0).map((_, i) => ({
@@ -74,21 +88,12 @@ export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: strin
           </div>
         ))}
       </div>
-      <div className='w-full'>
+      <div className='w-full lg:m-4'>
         {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
 
         <div style={{ width: '100%', height: 300 }}>
           <ResponsiveContainer>
-            <ComposedChart
-              width={500}
-              height={300}
-              data={grids}
-              margin={{
-                top: 20,
-                right: 20,
-                bottom: 20,
-                left: 20
-              }}>
+            <ComposedChart width={500} height={300} data={grids}>
               <CartesianGrid stroke='currentcolor' />
               <XAxis dataKey='date' tickFormatter={monthTickFormatter} fill='currentcolor' />
               <XAxis
@@ -101,7 +106,7 @@ export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: strin
                 scale='band'
                 xAxisId='quarter'
               />
-              <YAxis />
+              <YAxis hide={width < 768} tickFormatter={(v: any) => `${Math.ceil(v / 100) / 10}k`} />
               <Tooltip formatter={(value: any, name: string) => [formatMoney(value as number), t[name]]} />
               <Legend formatter={(name: string) => t[name]} />
               <Bar dataKey='IN' barSize={20} fill='hsl(var(--p))' />
