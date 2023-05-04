@@ -1,15 +1,19 @@
 'use client';
-import { Invoice } from '@/db/types';
+import { Invoice, InvoiceType } from '@/db/types';
 // @ts-nocheck
 import { useState } from 'react';
-import { PieChart, Pie, Tooltip, ResponsiveContainer, Sector } from 'recharts';
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Sector, Cell } from 'recharts';
 import { formatMoney } from '../../helper';
 
-const testData = [
-  { name: 'Category A', value: 400 },
-  { name: 'Category B', value: 300 },
-  { name: 'Category C', value: 300 },
-  { name: 'Category D', value: 200 }
+const COLORS = [
+  'hsl(var(--in))',
+  'hsl(var(--su))',
+  'hsl(var(--wa))',
+  'hsl(var(--er))',
+  'hsl(var(--p))',
+  'hsl(var(--s))',
+  // 'hsl(var(--n))',
+  'hsl(var(--a))'
 ];
 
 // @ts-ignore
@@ -31,7 +35,7 @@ const renderActiveShape = (props) => {
   return (
     <g>
       <text x={cx} y={cy} dy={8} textAnchor='middle' fill={fill}>
-        {payload.name}
+        {payload.category}
       </text>
       <Sector
         cx={cx}
@@ -53,7 +57,7 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill='none' />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke='none' />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill='#333'>{`${formatMoney(
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill={fill}>{`${formatMoney(
         value as number
       )}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill='#999'>
@@ -63,34 +67,92 @@ const renderActiveShape = (props) => {
   );
 };
 
-export function PieView({ data }: { data: Invoice[] }) {
-  const [activeIndex, setActiveIndex] = useState<number>();
+export function PieView({
+  data,
+  categories,
+  t
+}: {
+  data: Invoice[];
+  categories: { name: string; label: string }[];
+  t: { [k: string]: string };
+}) {
+  const [activeIndexIn, setActiveIndexIn] = useState<number>(0);
+  const [activeIndexOut, setActiveIndexOut] = useState<number>(0);
 
-  const onPieEnter = (_: any, index: number) => {
-    setActiveIndex(index);
+  const onPieEnterIn = (_: any, index: number) => {
+    setActiveIndexIn(index);
+  };
+  const onPieEnterOut = (_: any, index: number) => {
+    setActiveIndexOut(index);
+  };
+  const detail: {
+    IN: Invoice[];
+    OUT: Invoice[];
+  } = {
+    IN: [],
+    OUT: []
   };
 
+  data.forEach((item) => {
+    const category = categories.find((x) => x.name === item.category);
+    const index = detail[item.type as InvoiceType].findIndex((x) => x.category === category?.label);
+    if (index > -1) {
+      detail[item.type as InvoiceType][index].amount += item.amount;
+    } else {
+      const nd = {
+        category: category?.label,
+        amount: item.amount
+      };
+      detail[item.type as InvoiceType].push(nd as any as Invoice);
+    }
+  });
+
   return (
-    <div style={{ width: '100%', height: 300 }}>
-      <ResponsiveContainer>
-        <PieChart width={400} height={400}>
-          <Tooltip />
-          <Pie
-            activeIndex={activeIndex}
-            activeShape={renderActiveShape}
-            data={testData}
-            cx='50%'
-            cy='50%'
-            innerRadius={60}
-            outerRadius={80}
-            fill='#8884d8'
-            dataKey='value'
-            onMouseEnter={onPieEnter}
-          />
-          {/* <Pie data={data01} dataKey='value' cx='50%' cy='50%' outerRadius={60} fill='#8884d8' />
-          <Pie data={data02} dataKey='value' cx='50%' cy='50%' innerRadius={70} outerRadius={90} fill='#82ca9d' label /> */}
-        </PieChart>
-      </ResponsiveContainer>
+    <div className='flex lg:flex-row flex-col mb-10'>
+      <div className='w-full lg:w-1/2 h-[300px]'>
+        <h2 className='text-center text-2xl font-bold py-3'>{t.IN}</h2>
+        <ResponsiveContainer>
+          <PieChart width={300} height={300}>
+            <Pie
+              activeIndex={activeIndexIn}
+              activeShape={renderActiveShape}
+              data={detail.IN}
+              cx='50%'
+              cy='50%'
+              innerRadius={60}
+              outerRadius={80}
+              fill='hsl(var(--p))'
+              dataKey='amount'
+              onMouseEnter={onPieEnterIn}>
+              {detail.IN.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div className='w-full lg:w-1/2 h-[300px]'>
+        <h2 className='text-center text-2xl font-bold py-3'>{t.OUT}</h2>
+        <ResponsiveContainer>
+          <PieChart width={300} height={300}>
+            <Pie
+              activeIndex={activeIndexOut}
+              activeShape={renderActiveShape}
+              data={detail.OUT}
+              cx='50%'
+              cy='50%'
+              innerRadius={60}
+              outerRadius={80}
+              fill='hsl(var(--s))'
+              dataKey='amount'
+              onMouseEnter={onPieEnterOut}>
+              {detail.OUT.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

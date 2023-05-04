@@ -4,7 +4,7 @@ import { getLastMonthData, getMonthData } from '@/db/public';
 import { translation } from '@/lib/i18n';
 import { MonthStats } from './stats';
 import { Calendar } from './calendar';
-import { InvoiceType } from '@/db/types';
+import { InvoiceInCategory, InvoiceOutCategory, InvoiceType } from '@/db/types';
 import { PieView } from './pie';
 
 export default async function Page({ params: { lang, year, month } }: ContextParams) {
@@ -22,20 +22,20 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
     compareMonthData[item.type as InvoiceType] += item.amount;
   });
   compareMonthData.BALANCE = compareMonthData.IN - compareMonthData.OUT;
+  const categories = [
+    ...InvoiceInCategory.map((i) => ({ name: i, label: t(`category.${i}`) })),
+    ...InvoiceOutCategory.map((i) => ({ name: i, label: t(`category.${i}`) }))
+  ];
+  const types = { IN: t('type.IN'), OUT: t('type.OUT'), BALANCE: t('type.BALANCE') };
 
   return (
     <div>
       <h1 className='text-center text-5xl font-bold py-3'>
         {year}-{month.padStart(2, '0')}
       </h1>
-      <MonthStats
-        compareMonthData={compareMonthData}
-        lastMonthData={lastMonthData}
-        t={{ IN: t('type.IN'), OUT: t('type.OUT'), BALANCE: t('type.BALANCE') }}
-      />
+      <MonthStats compareMonthData={compareMonthData} lastMonthData={lastMonthData} t={types} />
       <Calendar data={monthData} />
-      <PieView data={monthData} />
-      <pre>{JSON.stringify(monthData, null, 2)}</pre>
+      <PieView data={monthData} categories={categories} t={types} />
     </div>
   );
 }
