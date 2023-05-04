@@ -67,6 +67,29 @@ const renderActiveShape = (props) => {
   );
 };
 
+export function TableView({ data, t }: { data: Invoice[]; t: { [k: string]: string } }) {
+  return (
+    <div className='w-full lg:w-1/2 lg:px-10'>
+      <table className='table table-zebra w-full max-w-full'>
+        <thead>
+          <tr>
+            <th>{t.category}</th>
+            <th>{t.amount}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr className='hover' key={item.category}>
+              <td>{item.category}</td>
+              <td>{formatMoney(item.amount)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function PieView({
   data,
   categories,
@@ -108,7 +131,7 @@ export function PieView({
   });
 
   return (
-    <div className='flex lg:flex-row flex-col mb-10'>
+    <div className='flex lg:flex-row flex-col mb-10 flex-wrap'>
       <div className='w-full lg:w-1/2 h-[300px]'>
         <h2 className='text-center text-2xl font-bold py-3'>{t.IN}</h2>
         <ResponsiveContainer>
@@ -153,6 +176,8 @@ export function PieView({
           </PieChart>
         </ResponsiveContainer>
       </div>
+      <TableView data={detail.IN} t={t} />
+      <TableView data={detail.OUT} t={t} />
     </div>
   );
 }

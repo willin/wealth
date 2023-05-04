@@ -26,7 +26,13 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
     ...InvoiceInCategory.map((i) => ({ name: i, label: t(`category.${i}`) })),
     ...InvoiceOutCategory.map((i) => ({ name: i, label: t(`category.${i}`) }))
   ];
-  const types = { IN: t('type.IN'), OUT: t('type.OUT'), BALANCE: t('type.BALANCE') };
+  const types = {
+    IN: t('type.IN'),
+    OUT: t('type.OUT'),
+    BALANCE: t('type.BALANCE'),
+    category: t('invoice.category'),
+    amount: t('invoice.amount')
+  };
 
   return (
     <div>
