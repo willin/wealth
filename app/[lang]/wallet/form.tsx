@@ -57,7 +57,11 @@ export default function Form({
 
     if (target.name === 'type') {
       setCategories(target.value === InvoiceType.IN ? inCategories : outCategories);
-      setItem({ ...item, type: target.value, category: InvoiceType.IN ? InvoiceInCategory[0] : InvoiceOutCategory[0] });
+      setItem({
+        ...item,
+        type: target.value,
+        category: target.value === InvoiceType.IN ? InvoiceInCategory[0] : InvoiceOutCategory[0]
+      });
     } else {
       setItem({ ...item, [target.name]: target.value });
     }
@@ -221,9 +225,9 @@ export default function Form({
                     viewBox='0 0 24 24'
                     className='w-4 h-4 stroke-current'>
                     <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
                       d='M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'></path>
                   </svg>
                 </span>

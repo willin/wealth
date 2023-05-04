@@ -7,6 +7,7 @@ import { Invoice, InvoiceType, Pagination } from '@/db/types';
 import { countInvoices, getInvoices } from '@/db/invoices';
 import { FilterType } from './filters';
 import { Paginator } from './pagination';
+import { formatMoney } from '../context';
 
 export const revalidate = 60;
 
@@ -59,8 +60,7 @@ export default async function Page({
                       'text-primary': item.type === InvoiceType.IN,
                       'text-secondary': item.type === InvoiceType.OUT
                     })}>
-                    ￥{item.type === InvoiceType.OUT ? '-' : ''}
-                    {item.amount}
+                    {formatMoney(item.type === InvoiceType.IN ? item.amount : -item.amount)}
                   </span>
                 </td>
                 <td>{t(`category.${item.category}`)}</td>
