@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { redirect } from 'next/navigation';
 import { ContextParams } from '@/app/[lang]/helper';
 import { getLastMonthData, getMonthData } from '@/db/public';
@@ -6,9 +5,10 @@ import { translation } from '@/lib/i18n';
 import { MonthStats } from './stats';
 import { Calendar } from './calendar';
 import { InvoiceType } from '@/db/types';
+import { PieView } from './pie';
 
 export default async function Page({ params: { lang, year, month } }: ContextParams) {
-  const date = new Date(+year, +month, 1);
+  const date = new Date(+year, +month - 1, 1);
   if (date.toString() === 'Invalid Date') {
     return redirect('/');
   }
@@ -33,10 +33,9 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
         lastMonthData={lastMonthData}
         t={{ IN: t('type.IN'), OUT: t('type.OUT'), BALANCE: t('type.BALANCE') }}
       />
-      {/* <Calendar monthData={monthData} /> */}
-
+      <Calendar data={monthData} />
+      <PieView data={monthData} />
       <pre>{JSON.stringify(monthData, null, 2)}</pre>
-      <pre>{JSON.stringify(lastMonthData, null, 2)}</pre>
     </div>
   );
 }

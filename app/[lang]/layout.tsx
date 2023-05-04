@@ -1,7 +1,4 @@
 import './globals.css';
-import dayjs from 'dayjs';
-import 'dayjs/locale/zh';
-import 'dayjs/locale/en';
 import { i18n } from '@/i18n-config';
 import { BackgroundImage } from './background';
 import { MainHeader } from './header';
@@ -47,8 +44,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children, params }: { children: React.ReactNode } & ContextParams) {
-  dayjs.locale(params.lang);
-
   return (
     <html lang={params.lang}>
       <head />
