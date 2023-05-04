@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { ContextParams } from './context';
+import { ContextParams } from './helper';
 
 export default function Home({ params: { lang } }: ContextParams) {
   const date = new Date();

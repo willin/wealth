@@ -9,7 +9,8 @@
   },
   "type": {
     "IN": "Income",
-    "OUT": "Expenditure"
+    "OUT": "Expenditure",
+    "BALANCE": "Balance"
   },
   "category": {
     "MAJOR": "Major",

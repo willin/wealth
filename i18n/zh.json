@@ -9,7 +9,8 @@
   },
   "type": {
     "IN": "收入",
-    "OUT": "支出"
+    "OUT": "支出",
+    "BALANCE": "结余"
   },
   "category": {
     "MAJOR": "主业收入",

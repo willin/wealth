@@ -7,7 +7,7 @@ import { Invoice, InvoiceType, Pagination } from '@/db/types';
 import { countInvoices, getInvoices } from '@/db/invoices';
 import { FilterType } from './filters';
 import { Paginator } from './pagination';
-import { formatMoney } from '../context';
+import { formatMoney } from '../helper';
 
 export const revalidate = 60;
 

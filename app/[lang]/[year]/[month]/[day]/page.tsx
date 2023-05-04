@@ -1,10 +1,10 @@
-import { ContextParams } from '@/app/[lang]/context';
+import { ContextParams } from '@/app/[lang]/helper';
+import { redirect } from 'next/navigation';
 
-export default async function Page({ params: { year: y } }: ContextParams) {
-  const now = new Date();
-  let year = now.getFullYear();
-  if (+y >= 2023 && +y <= year) {
-    year = +y;
+export default async function Page({ params: { year, month, day } }: ContextParams) {
+  const date = new Date(+year, +month, +day);
+  if (date.toString() === 'Invalid Date') {
+    return redirect('/');
   }
 
   return (
