@@ -2,10 +2,10 @@ import { redirect } from 'next/navigation';
 import { ContextParams } from '@/app/[lang]/helper';
 import { getLastMonthData, getMonthData } from '@/db/public';
 import { translation } from '@/lib/i18n';
-import { MonthStats } from './stats';
+import { MonthStats } from '../stats';
 import { Calendar } from './calendar';
 import { InvoiceInCategory, InvoiceOutCategory, InvoiceType } from '@/db/types';
-import { PieView } from './pie';
+import { PieView } from '../pie';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
@@ -66,7 +66,7 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
         </Link>
       </div>
 
-      <MonthStats compareMonthData={compareMonthData} lastMonthData={lastMonthData} t={types} />
+      <MonthStats toData={compareMonthData} lastData={lastMonthData} t={types} />
       <Calendar data={monthData} />
       <PieView data={monthData} categories={categories} t={types} />
     </div>

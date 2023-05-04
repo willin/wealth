@@ -48,7 +48,7 @@ export function Calendar({ data }: { data: Invoice[] }) {
             'col-start-6': i === 0 && weekday === 5,
             'col-start-7': i === 0 && weekday === 6
           })}>
-          <Link href={`/${params.lang}/${day.date.replace(/-/g, '/').replace(/0/g, '')}`}>
+          <Link href={`/${params.lang}/${dayjs(day.date).format('YYYY/M/D')}`}>
             <p>{i + 1}</p>
             <p
               className={clsx('whitespace-nowrap text-xs', {

@@ -18,26 +18,26 @@ export function StatComp({ to, last: l }: { to: number; last: number }) {
 }
 
 export function MonthStats({
-  compareMonthData,
-  lastMonthData,
+  toData,
+  lastData,
   t
 }: {
-  compareMonthData: iBalance;
-  lastMonthData: iBalance;
+  toData: iBalance;
+  lastData: iBalance;
   t: { [k: string]: string };
 }) {
   return (
     <div className='stats shadow w-full bg-opacity-30 mb-6'>
       <div className='stat'>
         <div className='stat-title'>{t.IN}</div>
-        <div className='stat-value text-primary'>{formatMoney(compareMonthData.IN)}</div>
-        <StatComp to={compareMonthData.IN} last={lastMonthData.IN} />
+        <div className='stat-value text-primary'>{formatMoney(toData.IN)}</div>
+        <StatComp to={toData.IN} last={lastData.IN} />
       </div>
 
       <div className='stat'>
         <div className='stat-title'>{t.OUT}</div>
-        <div className='stat-value text-secondary'>{formatMoney(compareMonthData.OUT)}</div>
-        <StatComp to={compareMonthData.OUT} last={lastMonthData.OUT} />
+        <div className='stat-value text-secondary'>{formatMoney(toData.OUT)}</div>
+        <StatComp to={toData.OUT} last={lastData.OUT} />
       </div>
 
       <div className='stat'>
@@ -57,12 +57,12 @@ export function MonthStats({
         <div className='stat-title'>{t.BALANCE}</div>
         <div
           className={clsx('stat-value', {
-            'text-primary': compareMonthData.BALANCE > 0,
-            'text-secondary': compareMonthData.BALANCE <= 0
+            'text-primary': toData.BALANCE > 0,
+            'text-secondary': toData.BALANCE <= 0
           })}>
-          {formatMoney(compareMonthData.BALANCE)}
+          {formatMoney(toData.BALANCE)}
         </div>
-        <StatComp to={compareMonthData.BALANCE} last={lastMonthData.BALANCE} />
+        <StatComp to={toData.BALANCE} last={lastData.BALANCE} />
       </div>
     </div>
   );
