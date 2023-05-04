@@ -2,6 +2,41 @@ import { cache } from 'react';
 import 'server-only';
 import { conn } from './mysql';
 import { Invoice, InvoiceType } from './types';
+import dayjs from 'dayjs';
+
+export const getDayData = cache(async (params: { year: number; month: number; day: number }) => {
+  const { year, month, day } = params;
+  const sql =
+    'SELECT `id`,`date`,`amount`,`type`,`category`,`desc` FROM invoices WHERE `date` >= :startdate AND `date` < :enddate ORDER BY `amount` DESC';
+  const startdate = new Date(year, month - 1, day);
+  const enddate = dayjs(startdate).add(1, 'day').format('YYYY-MM-DD');
+  const result = await conn.execute(sql, {
+    startdate,
+    enddate
+  });
+  const invoices: Invoice[] = result.rows as any;
+  return invoices;
+});
+
+export const getLastDayData = cache(async (params: { year: number; month: number; day: number }) => {
+  const { year, month, day } = params;
+  const sql =
+    'SELECT `date`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= :startdate AND `date` < :enddate GROUP BY `date`,`type`';
+  const enddate = new Date(year, month - 1, day);
+  const startdate = dayjs(enddate).add(-1, 'day').format('YYYY-MM-DD');
+
+  const result = await conn.execute(sql, {
+    startdate,
+    enddate
+  });
+  const data = { IN: 0, OUT: 0, BALANCE: 0 };
+  const invoices: Invoice[] = result.rows as any;
+  invoices.forEach((item) => {
+    data[item.type as InvoiceType] += item.amount;
+  });
+  data.BALANCE = data.IN - data.OUT;
+  return data;
+});
 
 export const getMonthData = cache(async (params: { year: number; month: number }) => {
   const { year, month } = params;
@@ -21,8 +56,8 @@ export const getLastMonthData = cache(async (params: { year: number; month: numb
   const { year, month } = params;
   const sql =
     "SELECT DATE_FORMAT(`date`, '%Y-%m') as `month`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= :startdate AND `date` < :enddate GROUP BY `month`,`type`";
-  const startdate = new Date(year, month - 2, 1);
   const enddate = new Date(year, month - 1, 1);
+  const startdate = dayjs(enddate).add(-1, 'month').format('YYYY-MM-DD');
   const result = await conn.execute(sql, {
     startdate,
     enddate

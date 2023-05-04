@@ -174,7 +174,6 @@ export default function Form({
                   className='input input-bordered'
                   step='.01'
                   value={item.amount}
-                  min='0'
                   onChange={changeItemFields}
                 />
               </label>

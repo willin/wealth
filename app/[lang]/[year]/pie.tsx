@@ -97,11 +97,15 @@ export function TableView({ data, t }: { data: Invoice[]; t: { [k: string]: stri
 export function PieView({
   data,
   categories,
-  t
+  hideTable,
+  t,
+  children
 }: {
   data: Invoice[];
   categories: { name: string; label: string }[];
   t: { [k: string]: string };
+  hideTable?: boolean;
+  children?: React.ReactNode;
 }) {
   const [activeIndexIn, setActiveIndexIn] = useState<number>(0);
   const [activeIndexOut, setActiveIndexOut] = useState<number>(0);
@@ -163,7 +167,7 @@ export function PieView({
       </div>
       <div
         className={clsx('w-full lg:w-1/2 h-[300px]', {
-          hidden: detail.IN.length === 0
+          hidden: detail.OUT.length === 0
         })}>
         <h2 className='text-center text-2xl font-bold py-3'>{t.OUT}</h2>
         <ResponsiveContainer>
@@ -186,8 +190,13 @@ export function PieView({
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <TableView data={detail.IN} t={t} />
-      <TableView data={detail.OUT} t={t} />
+      {!hideTable && (
+        <>
+          <TableView data={detail.IN} t={t} />
+          <TableView data={detail.OUT} t={t} />
+        </>
+      )}
+      {children}
     </div>
   );
 }
