@@ -22,7 +22,6 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
     compareYearData[item.type as InvoiceType] += item.amount;
   });
   compareYearData.BALANCE = compareYearData.IN - compareYearData.OUT;
-  console.log(compareYearData, lastYearData);
   const categories = [
     ...InvoiceInCategory.map((i) => ({ name: i, label: t(`category.${i}`) })),
     ...InvoiceOutCategory.map((i) => ({ name: i, label: t(`category.${i}`) }))
@@ -64,7 +63,7 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
       </div>
 
       <MonthStats toData={compareYearData} lastData={lastYearData} t={types} />
-      <YearView data={yearData} />
+      <YearView data={yearData} t={types} />
       <PieView data={yearData} categories={categories} t={types} />
     </div>
   );
