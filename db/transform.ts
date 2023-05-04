@@ -2,7 +2,7 @@ import { escape, escapeId } from 'sqlstring';
 import { InvoiceIndexes, OrderDirection, Pagination } from './types';
 
 export const getPaginator = (params: Partial<Pagination>, indexes = InvoiceIndexes): Pagination => {
-  let { limit = 10, page = 1, direction = OrderDirection.DESC, order = '' } = params;
+  let { limit = 20, page = 1, direction = OrderDirection.DESC, order = '' } = params;
   // type check
   page = Number(page);
   limit = Number(limit);
