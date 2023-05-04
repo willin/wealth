@@ -10,9 +10,12 @@ const dictionaries = {
   zh: () => import('../i18n/zh.json').then((module) => module.default)
 };
 
+// eslint-disable-next-line no-unused-vars
+export type Translator = (key: string, params?: any) => string;
+
 export const translation = async (locale: Locale) => {
   const dict = await dictionaries[locale]();
-  const t = (key: string, params?: any): string => {
+  const t: Translator = (key, params) => {
     // eslint-disable-next-line
     const val = dlv(dict as any, key, key);
     // eslint-disable-next-line

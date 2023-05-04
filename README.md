@@ -1,26 +1,16 @@
-# Paid NPM Platform
+# Wealth
 
-To sell & buy NPM packages. <https://npm.log.lu>
+> Demo Site: <https://wealth.willin.wang>
 
-## Roadmap
+## Authenticated API
 
-### v0.1
+- `GET /api/invoice`: Paginated Invoices
+- `GET /api/invoice/count`: Paginated Invoices Total Count
+- `POST /api/invoice`: Create Invoice
+- `GET /api/invoice/:id`: Get Invoice
+- `PUT /api/invoice/:id`: Update Invoice
+- `DELETE /api/invoice/:id`: Soft Delete Invoice
 
-- Github login
-- Payment order (Paypal, USD)
-- Package Token
+## LICENSE
 
-### v0.2
-
-- Payouts
-- I18n
-
-### v0.3
-
-- Refund and revoke token
-- Add other currencies / payment methods
-
-### Others
-
-- Docs Site
-- Pro Version (With Analytics, etc.)
+Apache 2.0

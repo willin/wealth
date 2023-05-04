@@ -1,65 +1,82 @@
+export const InvoiceInCategory = [
+  // 主业
+  'MAJOR',
+  // 副业
+  'SIDE',
+  // 投资理财
+  'INVEST',
+  // 红包打赏
+  'DONATE',
+  // 其他
+  'OTHERS'
+];
+
+export const InvoiceOutCategory = [
+  // 餐饮
+  'FOOD',
+  // 娱乐
+  'GAME',
+  // 学习提升
+  'STUDY',
+  // 交通
+  'TRAFFIC',
+  // 充值
+  'RECHARGE',
+  // 数码
+  'DIGITAL',
+  // 服饰
+  'CLOTHES',
+  // 日用
+  'DAILY',
+  // 家庭
+  'FAMILY',
+  // 医疗
+  'MEDICAL',
+  // 红包打赏
+  'DONATE',
+  // 其他
+  'OTHERS'
+];
+
+export const InvoiceMethod = [
+  // 支付宝
+  'ALIPAY',
+  // 微信
+  'WECHAT',
+  // 信用卡
+  'CREDIT',
+  // 银行卡
+  'BANK',
+  // 其他账户
+  'OTHERS'
+];
+
+export enum InvoiceType {
+  IN = 'IN',
+  OUT = 'OUT'
+}
+
 export enum OrderDirection {
   ASC = 'ASC',
   DESC = 'DESC'
 }
 
-export enum PaidType {
-  ONCE = 'ONCE',
-  SUBCRIBE = 'SUBCRIBE'
+export interface Pagination {
+  limit: number;
+  page: number;
+  order: string;
+  direction: OrderDirection;
 }
 
-export enum PaymentMethod {
-  PAYPAL = 'PAYPAL'
-}
-
-export interface Package {
-  uid: number;
-  npm: string;
-  // 100 = 1.00 USD
-  price: number;
-  type: PaidType;
-  created_at: number;
-  updated_at: number;
-}
-
-export enum OrderStatus {
-  CREATED = 'CREATED',
-  PAID = 'PAID',
-  CANCELED = 'CANCELED',
-  CLOSED = 'CLOSED'
-}
-
-export interface Order {
-  oid: string;
-  uid: number;
-  npm: string;
-  // 100 = 1.00 USD
-  fee: number;
-  // 0: forever, or N months
+export interface Invoice {
+  id?: number;
+  type: string;
+  date: Date | string;
+  category: string;
   amount: number;
-  method: PaymentMethod;
-  status: OrderStatus;
-  token: string;
-  created_at: number;
-  updated_at: number;
+  method: string;
+  desc: string;
+  note: string;
 }
 
-export interface Token {
-  token: string;
-  uid: number;
-  npm: string;
-  // 0: forever, 1: disabled, or unix timestamp
-  expired_at: number;
-  created_at: number;
-  updated_at: number;
-}
-
-export interface User {
-  uid: number;
-  username: string;
-  email: string;
-  // 100 = 1.00 USD
-  balance: number;
-  created_at: number;
-  updated_at: number;
-}
+export const InvoiceIndexes = ['date', 'type', 'category', 'amount', 'id'];
