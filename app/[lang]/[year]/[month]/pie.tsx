@@ -1,9 +1,10 @@
 'use client';
 import { Invoice, InvoiceType } from '@/db/types';
 // @ts-nocheck
+import clsx from 'classnames';
 import { useState } from 'react';
-import { PieChart, Pie, Tooltip, ResponsiveContainer, Sector, Cell } from 'recharts';
-import { formatMoney } from '../../helper';
+import { PieChart, Pie, ResponsiveContainer, Sector, Cell } from 'recharts';
+import { formatMoney } from '@/app/[lang]/helper';
 
 const COLORS = [
   'hsl(var(--in))',
@@ -69,7 +70,10 @@ const renderActiveShape = (props) => {
 
 export function TableView({ data, t }: { data: Invoice[]; t: { [k: string]: string } }) {
   return (
-    <div className='w-full lg:w-1/2 lg:px-10'>
+    <div
+      className={clsx('w-full lg:w-1/2 lg:px-10 pt-4', {
+        hidden: data.length === 0
+      })}>
       <table className='table table-zebra w-full max-w-full'>
         <thead>
           <tr>
@@ -132,7 +136,10 @@ export function PieView({
 
   return (
     <div className='flex lg:flex-row flex-col mb-10 flex-wrap'>
-      <div className='w-full lg:w-1/2 h-[300px]'>
+      <div
+        className={clsx('w-full lg:w-1/2 h-[300px]', {
+          hidden: detail.IN.length === 0
+        })}>
         <h2 className='text-center text-2xl font-bold py-3'>{t.IN}</h2>
         <ResponsiveContainer>
           <PieChart width={300} height={300}>
@@ -154,7 +161,10 @@ export function PieView({
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div className='w-full lg:w-1/2 h-[300px]'>
+      <div
+        className={clsx('w-full lg:w-1/2 h-[300px]', {
+          hidden: detail.IN.length === 0
+        })}>
         <h2 className='text-center text-2xl font-bold py-3'>{t.OUT}</h2>
         <ResponsiveContainer>
           <PieChart width={300} height={300}>

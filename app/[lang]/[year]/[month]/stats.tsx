@@ -4,7 +4,7 @@ import { formatMoney, iBalance } from '@/app/[lang]/helper';
 
 export function StatComp({ to, last: l }: { to: number; last: number }) {
   const last = l || 1;
-  const diff = to - last;
+  const diff = to - l;
 
   return (
     <div
