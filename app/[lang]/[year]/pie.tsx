@@ -3,8 +3,21 @@ import { Invoice, InvoiceType } from '@/db/types';
 // @ts-nocheck
 import clsx from 'classnames';
 import { useState } from 'react';
-import { PieChart, Pie, ResponsiveContainer, Sector, Cell } from 'recharts';
-import { formatMoney } from '@/app/[lang]/helper';
+import {
+  PieChart,
+  Pie,
+  ResponsiveContainer,
+  Sector,
+  Cell,
+  Legend,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ReferenceLine
+} from 'recharts';
+import { formatMoney, iBalance } from '@/app/[lang]/helper';
 
 const COLORS = [
   'hsl(var(--in))',
@@ -99,20 +112,18 @@ export function PieView({
   categories,
   hideTable,
   t,
-  children
+  children,
+  summary
 }: {
   data: Invoice[];
   categories: { name: string; label: string }[];
   t: { [k: string]: string };
+  summary: iBalance;
   hideTable?: boolean;
   children?: React.ReactNode;
 }) {
-  const [activeIndexIn, setActiveIndexIn] = useState<number>(0);
   const [activeIndexOut, setActiveIndexOut] = useState<number>(0);
 
-  const onPieEnterIn = (_: any, index: number) => {
-    setActiveIndexIn(index);
-  };
   const onPieEnterOut = (_: any, index: number) => {
     setActiveIndexOut(index);
   };
@@ -141,37 +152,57 @@ export function PieView({
   return (
     <div className='flex lg:flex-row flex-col mb-10 flex-wrap'>
       <div
-        className={clsx('w-full lg:w-1/2 h-[300px]', {
+        className={clsx('w-full lg:w-1/2 h-[300px] mb-10', {
           hidden: detail.IN.length === 0
         })}>
         <h2 className='text-center text-2xl font-bold py-3'>{t.IN}</h2>
         <ResponsiveContainer>
-          <PieChart width={300} height={300}>
-            <Pie
-              activeIndex={activeIndexIn}
-              activeShape={renderActiveShape}
-              data={detail.IN}
-              cx='50%'
-              cy='50%'
-              innerRadius={60}
-              outerRadius={80}
-              fill='hsl(var(--p))'
-              dataKey='amount'
-              onMouseEnter={onPieEnterIn}>
+          <BarChart
+            width={300}
+            height={300}
+            data={detail.IN}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5
+            }}>
+            <XAxis dataKey='category' hide />
+            <YAxis />
+            <ReferenceLine y={0} strokeDasharray='3 3' />
+            <Legend
+              formatter={(value, entry) => {
+                const { color } = entry;
+                return <span style={{ color }}>{value}</span>;
+              }}
+              payload={detail.IN.map((entry, index) => ({
+                value: entry.category,
+                color: COLORS[index % COLORS.length]
+              }))}
+            />
+
+            <Tooltip
+              formatter={(value: string, key: string) => [
+                `${formatMoney(+value)} (${Math.ceil((+value / summary.IN) * 1e4) / 100}%)`,
+                t[key]
+              ]}
+            />
+            <Bar dataKey='amount'>
               {detail.IN.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
-            </Pie>
-          </PieChart>
+            </Bar>
+          </BarChart>
         </ResponsiveContainer>
       </div>
       <div
-        className={clsx('w-full lg:w-1/2 h-[300px]', {
+        className={clsx('w-full lg:w-1/2 h-[300px] mb-10', {
           hidden: detail.OUT.length === 0
         })}>
         <h2 className='text-center text-2xl font-bold py-3'>{t.OUT}</h2>
         <ResponsiveContainer>
           <PieChart width={300} height={300}>
+            <Legend formatter={(_, { payload }) => (payload as any as Invoice).category} />
             <Pie
               activeIndex={activeIndexOut}
               activeShape={renderActiveShape}

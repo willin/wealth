@@ -64,7 +64,7 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
 
       <MonthStats toData={compareYearData} lastData={lastYearData} t={types} />
       <YearView data={yearData} t={types} />
-      <PieView data={yearData} categories={categories} t={types} />
+      <PieView data={yearData} categories={categories} t={types} summary={compareYearData} />
     </div>
   );
 }

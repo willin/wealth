@@ -94,7 +94,7 @@ export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: strin
         <div style={{ width: '100%', height: 300 }}>
           <ResponsiveContainer>
             <ComposedChart width={500} height={300} data={grids}>
-              <CartesianGrid stroke='currentcolor' />
+              <CartesianGrid stroke='currentcolor' strokeDasharray='3 3' />
               <XAxis dataKey='date' tickFormatter={monthTickFormatter} fill='currentcolor' />
               <XAxis
                 dataKey='date'
@@ -111,7 +111,7 @@ export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: strin
               <Legend formatter={(name: string) => t[name]} />
               <Bar dataKey='IN' barSize={20} fill='hsl(var(--p))' />
               <Bar dataKey='OUT' barSize={20} fill='hsl(var(--s))' />
-              <Line type='monotone' dataKey='BALANCE' stroke='hsl(var(--a))' strokeDasharray='5 5' />
+              <Line type='monotone' dataKey='BALANCE' stroke='hsl(var(--a))' />
             </ComposedChart>
           </ResponsiveContainer>
         </div>

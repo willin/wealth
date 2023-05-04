@@ -68,7 +68,7 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
 
       <MonthStats toData={compareMonthData} lastData={lastMonthData} t={types} />
       <Calendar data={monthData} />
-      <PieView data={monthData} categories={categories} t={types} />
+      <PieView data={monthData} categories={categories} t={types} summary={compareMonthData} />
     </div>
   );
 }

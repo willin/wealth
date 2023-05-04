@@ -68,7 +68,7 @@ export default async function Page({ params: { year, month, day, lang } }: Conte
       </div>
 
       <MonthStats toData={compareDayData} lastData={lastDayData} t={types} />
-      <PieView data={dayData} categories={categories} t={types} hideTable={true}>
+      <PieView data={dayData} categories={categories} t={types} summary={compareDayData} hideTable={true}>
         <DetailsTable data={dayData} t={types} categories={categories} />
       </PieView>
     </div>
