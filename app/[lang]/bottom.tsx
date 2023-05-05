@@ -12,7 +12,7 @@ export function BottomNav({ lang }: { lang: Locale }) {
   const day = now.getDate();
 
   return (
-    <div className='btm-nav text-primary text-sm'>
+    <div className='btm-nav text-primary text-sm z-50'>
       <Link
         href={`/${lang}/${year}`}
         className={clsx({
