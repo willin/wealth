@@ -56,6 +56,12 @@ export default async function AboutPage({ params: { lang } }: ContextParams) {
                   </a>
                 </li>
                 <li>
+                  {t('meta.social')}：
+                  <a href='https://log.lu/@willin' target='_blank' className='link'>
+                    @willin@log.lu
+                  </a>
+                </li>
+                <li>
                   <a href='https://space.bilibili.com/445780384' target='_blank' className='link'>
                     Bilibili
                   </a>
