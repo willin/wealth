@@ -2,7 +2,6 @@
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import { Invoice, InvoiceInCategory, InvoiceMethod, InvoiceOutCategory, InvoiceType } from '@/db/types';
-import { BaseURL } from '@/lib/config';
 import dayjs from 'dayjs';
 import clsx from 'classnames';
 import { useEffect, useState } from 'react';
@@ -43,7 +42,7 @@ export default function Form({
   useEffect(() => {
     if (id) {
       setLoading(true);
-      void fetcher(`${BaseURL}/api/invoices/${id}`).then(({ data }: { data: Invoice }) => {
+      void fetcher(`/api/invoices/${id}`).then(({ data }: { data: Invoice }) => {
         setCategories(data.type === InvoiceType.IN ? inCategories : outCategories);
         setItem(data);
         setLoading(false);
