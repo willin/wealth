@@ -6,6 +6,7 @@ import { ContextParams } from './helper';
 import { Metadata } from 'next';
 import { BaseURL } from '@/lib/config';
 import { BottomNav } from './bottom';
+import { Bootstrap } from './bootstrap';
 
 export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -50,8 +51,15 @@ export default function RootLayout({ children, params }: { children: React.React
       <body>
         <BackgroundImage />
         <MainHeader />
-        <div className='container mx-auto shadow bg-neutral/70 p-2 sm:p-4'>{children}</div>
+        <div className='container mx-auto shadow bg-neutral/70 p-2 sm:p-4 mb-20'>
+          {children}
+          <footer className='text-center text-sm'>
+            &copy; <a href='https://willin.wang'>Willin Wang</a>
+          </footer>
+        </div>
+
         <BottomNav lang={params.lang} />
+        <Bootstrap />
       </body>
     </html>
   );
