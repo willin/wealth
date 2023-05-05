@@ -43,5 +43,12 @@
     "login": "Sign In",
     "forbidden": "Forbidden",
     "go_back": "Go Back"
+  },
+  "meta": {
+    "brief": "To be Willin is to be willing.",
+    "intro": "You can follow me or donate on the following platforms.",
+    "alipay_account": "Fund Real Account",
+    "douyin": "Douyin",
+    "wechat": "Wechat Public"
   }
 }
