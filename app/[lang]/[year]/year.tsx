@@ -10,6 +10,7 @@ import { Invoice, InvoiceType } from '@/db/types';
 import { formatMoney } from '@/app/[lang]/helper';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { GridSpan } from './stats';
 
 function useWindowWidth() {
   const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth);
@@ -52,6 +53,7 @@ const renderQuarterTick = (tickProps: { x: number; y: number; payload: { value: 
 };
 
 export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: string } }) {
+  const [showType, setShowType] = useState<'IN' | 'OUT' | 'BALANCE'>('BALANCE');
   const params = useParams();
   const width = useWindowWidth();
   dayjs.locale(params.lang);
@@ -72,18 +74,25 @@ export function YearView({ data, t }: { data: Invoice[]; t: { [k: string]: strin
 
   return (
     <div>
+      <div className='flex justify-center'>
+        <div className='form-control'>
+          <label className='input-group'>
+            <span> {t.category}</span>
+            {/* @ts-ignore */}
+            <select className='select' value={showType} onChange={(e) => setShowType(e.target.value)}>
+              <option value={InvoiceType.IN}>{t.IN}</option>
+              <option value={InvoiceType.OUT}>{t.OUT}</option>
+              <option value={'BALANCE'}>{t.BALANCE}</option>
+            </select>{' '}
+          </label>
+        </div>
+      </div>
       <div className='grid grid-cols-4 gap-4 text-center py-4'>
         {grids.map((day) => (
           <div key={day.date}>
             <Link href={`/${params.lang}/${dayjs(day.date).format(`YYYY/M`)}`}>
               <p>{dayjs(day.date).format('MMM')}</p>
-              <p
-                className={clsx('whitespace-nowrap text-xs', {
-                  'text-primary': day.BALANCE > 0,
-                  'text-secondary': day.BALANCE < 0
-                })}>
-                {formatMoney(day.BALANCE)}
-              </p>
+              <GridSpan value={day[showType]} />
             </Link>
           </div>
         ))}

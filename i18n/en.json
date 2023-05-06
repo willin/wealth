@@ -37,6 +37,7 @@
     "OTHERS": "Others"
   },
   "common": {
+    "total": "Total History",
     "operation": "Operation",
     "edit": "Edit",
     "all": "All",
@@ -49,6 +50,7 @@
     "intro": "You can follow me or donate on the following platforms.",
     "alipay_account": "Fund Real Account",
     "douyin": "Douyin",
-    "wechat": "Wechat Public"
+    "wechat": "Wechat Public",
+    "social": "Microblog"
   }
 }

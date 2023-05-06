@@ -37,6 +37,7 @@
     "OTHERS": "其他"
   },
   "common": {
+    "total": "历史总计",
     "operation": "操作",
     "edit": "编辑",
     "all": "全部",
@@ -49,6 +50,7 @@
     "intro": "您可以在以下平台关注我，或进行打赏。",
     "alipay_account": "基金实盘",
     "douyin": "抖音号",
-    "wechat": "微信公众号"
+    "wechat": "微信公众号",
+    "social": "微博客"
   }
 }

@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { ContextParams } from '@/app/[lang]/helper';
 import { getLastMonthData, getMonthData } from '@/db/public';
 import { translation } from '@/lib/i18n';
-import { MonthStats } from '../stats';
+import { MainStats } from '../stats';
 import { Calendar } from './calendar';
 import { InvoiceInCategory, InvoiceOutCategory, InvoiceType } from '@/db/types';
 import { PieView } from '../pie';
@@ -40,10 +40,10 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
 
   return (
     <div>
-      <div className='flex justify-between'>
+      <div className='flex justify-between py-3'>
         <Link href={`/${lang}/${prev.year()}/${prev.month() + 1}`} className='mx-4'>
           <svg
-            className='h-6 w-6 fill-current md:h-8 md:w-8'
+            className='fill-current h-12 w-12'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
@@ -51,12 +51,12 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
             <path d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'></path>
           </svg>
         </Link>
-        <h1 className='text-center text-5xl font-bold py-3'>
+        <h1 className='text-center text-5xl font-bold'>
           {year}-{month.padStart(2, '0')}
         </h1>
         <Link href={`/${lang}/${next.year()}/${next.month() + 1}`} className='mx-4'>
           <svg
-            className='h-6 w-6 fill-current md:h-8 md:w-8'
+            className='fill-current h-12 w-12'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
@@ -66,8 +66,8 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
         </Link>
       </div>
 
-      <MonthStats toData={compareMonthData} lastData={lastMonthData} t={types} />
-      <Calendar data={monthData} />
+      <MainStats toData={compareMonthData} lastData={lastMonthData} t={types} />
+      <Calendar data={monthData} t={types} />
       <PieView data={monthData} categories={categories} t={types} summary={compareMonthData} />
     </div>
   );

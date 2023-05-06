@@ -3,7 +3,7 @@ import { themeChange } from 'theme-change';
 import { useEffect } from 'react';
 import { themes } from '@/lib/themes';
 
-export function ThemeChange({ title }: { [k: string]: string } = { title: '' }) {
+export function ThemeChange({ title }: { [k: string]: string }) {
   useEffect(() => {
     themeChange(false);
     // 👆 false parameter is required for react project

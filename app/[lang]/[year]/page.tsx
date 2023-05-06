@@ -2,9 +2,9 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import { ContextParams } from '@/app/[lang]/helper';
 import { redirect } from 'next/navigation';
-import { getLastYearData, getYearData } from '@/db/public';
+import { getLastYearData, getTotalData, getYearData } from '@/db/public';
 import { translation } from '@/lib/i18n';
-import { MonthStats } from './stats';
+import { MainStats } from './stats';
 import { InvoiceInCategory, InvoiceOutCategory, InvoiceType } from '@/db/types';
 import { PieView } from './pie';
 import { YearView } from './year';
@@ -16,7 +16,11 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
   }
 
   const t = await translation(lang);
-  const [yearData, lastYearData] = await Promise.all([getYearData({ year: +year }), getLastYearData({ year: +year })]);
+  const [yearData, lastYearData, totalData] = await Promise.all([
+    getYearData({ year: +year }),
+    getLastYearData({ year: +year }),
+    getTotalData()
+  ]);
   const compareYearData = { IN: 0, OUT: 0, BALANCE: 0 };
   yearData.forEach((item) => {
     compareYearData[item.type as InvoiceType] += item.amount;
@@ -38,10 +42,10 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
 
   return (
     <div>
-      <div className='flex justify-between'>
+      <div className='flex justify-between py-3'>
         <Link href={`/${lang}/${prev.year()}`} className='mx-4'>
           <svg
-            className='h-6 w-6 fill-current md:h-8 md:w-8'
+            className='fill-current h-12 w-12'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
@@ -49,10 +53,10 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
             <path d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'></path>
           </svg>
         </Link>
-        <h1 className='text-center text-5xl font-bold py-3'>{year}</h1>
+        <h1 className='text-center text-5xl font-bold'>{year}</h1>
         <Link href={`/${lang}/${next.year()}`} className='mx-4'>
           <svg
-            className='h-6 w-6 fill-current md:h-8 md:w-8'
+            className='fill-current h-12 w-12'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
@@ -62,9 +66,14 @@ export default async function Page({ params: { lang, year } }: ContextParams) {
         </Link>
       </div>
 
-      <MonthStats toData={compareYearData} lastData={lastYearData} t={types} />
+      <MainStats toData={compareYearData} lastData={lastYearData} t={types} />
       <YearView data={yearData} t={types} />
       <PieView data={yearData} categories={categories} t={types} summary={compareYearData} />
+
+      <div className='flex justify-center py-3'>
+        <h2 className='text-center text-3xl font-bold'>{t('common.total')}</h2>
+      </div>
+      <MainStats toData={totalData} lastData={lastYearData} t={types} hideCompare />
     </div>
   );
 }

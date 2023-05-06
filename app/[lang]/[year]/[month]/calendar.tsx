@@ -7,8 +7,11 @@ import { useParams } from 'next/navigation';
 import { Invoice, InvoiceType } from '@/db/types';
 import { formatMoney } from '@/app/[lang]/helper';
 import Link from 'next/link';
+import { GridSpan } from '../stats';
+import { useState } from 'react';
 
-export function Calendar({ data }: { data: Invoice[] }) {
+export function Calendar({ data, t }: { data: Invoice[]; t: { [k: string]: string } }) {
+  const [showType, setShowType] = useState<'IN' | 'OUT' | 'BALANCE'>('BALANCE');
   const params = useParams();
   dayjs.locale(params.lang);
   const year = +params.year;
@@ -33,34 +36,42 @@ export function Calendar({ data }: { data: Invoice[] }) {
   const week = new Array(7).fill(0).map((_, i) => i);
 
   return (
-    <div className='grid grid-cols-7 gap-4 text-center py-4'>
-      {week.map((day) => (
-        <div key={`d-${day}`}>{dayjs(date).startOf('week').add(day, 'day').format('ddd')}</div>
-      ))}
-      {grids.map((day, i) => (
-        <div
-          key={day.date}
-          className={clsx({
-            'col-start-2': i === 0 && weekday === 1,
-            'col-start-3': i === 0 && weekday === 2,
-            'col-start-4': i === 0 && weekday === 3,
-            'col-start-5': i === 0 && weekday === 4,
-            'col-start-6': i === 0 && weekday === 5,
-            'col-start-7': i === 0 && weekday === 6
-          })}>
-          <Link href={`/${params.lang}/${dayjs(day.date).format('YYYY/M/D')}`}>
-            <p>{i + 1}</p>
-            <p
-              className={clsx('whitespace-nowrap text-xs', {
-                'text-primary': day.BALANCE > 0,
-                'text-secondary': day.BALANCE < 0,
-                hidden: day.BALANCE === 0
-              })}>
-              {formatMoney(day.BALANCE)}
-            </p>
-          </Link>
+    <div>
+      <div className='flex justify-center'>
+        <div className='form-control'>
+          <label className='input-group'>
+            <span> {t.category}</span>
+            {/* @ts-ignore */}
+            <select className='select' value={showType} onChange={(e) => setShowType(e.target.value)}>
+              <option value={InvoiceType.IN}>{t.IN}</option>
+              <option value={InvoiceType.OUT}>{t.OUT}</option>
+              <option value={'BALANCE'}>{t.BALANCE}</option>
+            </select>{' '}
+          </label>
         </div>
-      ))}
+      </div>
+      <div className='grid grid-cols-7 gap-4 text-center py-4'>
+        {week.map((day) => (
+          <div key={`d-${day}`}>{dayjs(date).startOf('week').add(day, 'day').format('ddd')}</div>
+        ))}
+        {grids.map((day, i) => (
+          <div
+            key={day.date}
+            className={clsx({
+              'col-start-2': i === 0 && weekday === 1,
+              'col-start-3': i === 0 && weekday === 2,
+              'col-start-4': i === 0 && weekday === 3,
+              'col-start-5': i === 0 && weekday === 4,
+              'col-start-6': i === 0 && weekday === 5,
+              'col-start-7': i === 0 && weekday === 6
+            })}>
+            <Link href={`/${params.lang}/${dayjs(day.date).format('YYYY/M/D')}`}>
+              <p>{i + 1}</p>
+              <GridSpan value={day[showType]} />
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,6 +2,18 @@
 import clsx from 'classnames';
 import { formatMoney, iBalance } from '@/app/[lang]/helper';
 
+export function GridSpan({ value }: { value: number }) {
+  return (
+    <p
+      className={clsx('whitespace-nowrap text-xs', {
+        'text-primary': value > 0,
+        'text-secondary': value < 0
+      })}>
+      {formatMoney(value)}
+    </p>
+  );
+}
+
 export function StatComp({ to, last: l }: { to: number; last: number }) {
   const last = l || 1;
   const diff = to - l;
@@ -17,27 +29,29 @@ export function StatComp({ to, last: l }: { to: number; last: number }) {
   );
 }
 
-export function MonthStats({
+export function MainStats({
   toData,
   lastData,
+  hideCompare,
   t
 }: {
+  hideCompare?: boolean;
   toData: iBalance;
   lastData: iBalance;
   t: { [k: string]: string };
 }) {
   return (
-    <div className='stats shadow w-full bg-opacity-30 mb-6'>
+    <div className='stats stats-vertical lg:stats-horizontal shadow w-full bg-opacity-30 mb-6'>
       <div className='stat'>
         <div className='stat-title'>{t.IN}</div>
         <div className='stat-value text-primary'>{formatMoney(toData.IN)}</div>
-        <StatComp to={toData.IN} last={lastData.IN} />
+        {!hideCompare && <StatComp to={toData.IN} last={lastData.IN} />}
       </div>
 
       <div className='stat'>
         <div className='stat-title'>{t.OUT}</div>
         <div className='stat-value text-secondary'>{formatMoney(toData.OUT)}</div>
-        <StatComp to={toData.OUT} last={lastData.OUT} />
+        {!hideCompare && <StatComp to={toData.OUT} last={lastData.OUT} />}
       </div>
 
       <div className='stat'>
@@ -62,7 +76,7 @@ export function MonthStats({
           })}>
           {formatMoney(toData.BALANCE)}
         </div>
-        <StatComp to={toData.BALANCE} last={lastData.BALANCE} />
+        {!hideCompare && <StatComp to={toData.BALANCE} last={lastData.BALANCE} />}
       </div>
     </div>
   );
