@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { ContextParams } from '@/app/[lang]/helper';
 import { getLastMonthData, getMonthData } from '@/db/public';
 import { translation } from '@/lib/i18n';
-import { MonthStats } from '../stats';
+import { MainStats } from '../stats';
 import { Calendar } from './calendar';
 import { InvoiceInCategory, InvoiceOutCategory, InvoiceType } from '@/db/types';
 import { PieView } from '../pie';
@@ -66,7 +66,7 @@ export default async function Page({ params: { lang, year, month } }: ContextPar
         </Link>
       </div>
 
-      <MonthStats toData={compareMonthData} lastData={lastMonthData} t={types} />
+      <MainStats toData={compareMonthData} lastData={lastMonthData} t={types} />
       <Calendar data={monthData} t={types} />
       <PieView data={monthData} categories={categories} t={types} summary={compareMonthData} />
     </div>

@@ -37,6 +37,7 @@
     "OTHERS": "Others"
   },
   "common": {
+    "total": "Total History",
     "operation": "Operation",
     "edit": "Edit",
     "all": "All",

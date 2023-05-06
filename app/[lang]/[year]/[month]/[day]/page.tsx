@@ -5,7 +5,7 @@ import { translation } from '@/lib/i18n';
 import { InvoiceInCategory, InvoiceOutCategory, InvoiceType } from '@/db/types';
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { MonthStats } from '../../stats';
+import { MainStats } from '../../stats';
 import { PieView } from '../../pie';
 import { DetailsTable } from './details';
 
@@ -67,7 +67,7 @@ export default async function Page({ params: { year, month, day, lang } }: Conte
         </Link>
       </div>
 
-      <MonthStats toData={compareDayData} lastData={lastDayData} t={types} />
+      <MainStats toData={compareDayData} lastData={lastDayData} t={types} />
       <PieView data={dayData} categories={categories} t={types} summary={compareDayData} hideTable={true}>
         <DetailsTable data={dayData} t={types} categories={categories} />
       </PieView>

@@ -37,6 +37,7 @@
     "OTHERS": "其他"
   },
   "common": {
+    "total": "历史总计",
     "operation": "操作",
     "edit": "编辑",
     "all": "全部",

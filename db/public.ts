@@ -103,3 +103,15 @@ export const getLastYearData = cache(async (params: { year: number }) => {
   data.BALANCE = data.IN - data.OUT;
   return data;
 });
+
+export const getTotalData = async () => {
+  const sql = 'SELECT SUM(`amount`) as `amount`,`type` FROM invoices GROUP BY `type`';
+  const result = await conn.execute(sql);
+  const data = { IN: 0, OUT: 0, BALANCE: 0 };
+  const invoices: Invoice[] = result.rows as any;
+  invoices.forEach((item) => {
+    data[item.type as InvoiceType] += item.amount;
+  });
+  data.BALANCE = data.IN - data.OUT;
+  return data;
+};
