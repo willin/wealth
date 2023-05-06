@@ -1,4 +1,5 @@
-export default function DefaultHead({ imported }: { imported?: boolean } = { imported: false }) {
+export default function DefaultHead(params: { imported?: boolean }) {
+  const { imported = false } = params;
   return (
     <>
       {!imported && (

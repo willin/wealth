@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 const reg = new RegExp(i18n.locales.map((x) => `/${x}`).join('|'));
 
-export function LanguageChange({ title }: { [k: string]: string } = { title: '' }) {
+export function LanguageChange({ title }: { [k: string]: string }) {
   const pathname = usePathname();
 
   return (

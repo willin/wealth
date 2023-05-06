@@ -2,6 +2,18 @@
 import clsx from 'classnames';
 import { formatMoney, iBalance } from '@/app/[lang]/helper';
 
+export function GridSpan({ value }: { value: number }) {
+  return (
+    <p
+      className={clsx('whitespace-nowrap text-xs', {
+        'text-primary': value > 0,
+        'text-secondary': value < 0
+      })}>
+      {formatMoney(value)}
+    </p>
+  );
+}
+
 export function StatComp({ to, last: l }: { to: number; last: number }) {
   const last = l || 1;
   const diff = to - l;
@@ -27,7 +39,7 @@ export function MonthStats({
   t: { [k: string]: string };
 }) {
   return (
-    <div className='stats shadow w-full bg-opacity-30 mb-6'>
+    <div className='stats stats-vertical lg:stats-horizontal shadow w-full bg-opacity-30 mb-6'>
       <div className='stat'>
         <div className='stat-title'>{t.IN}</div>
         <div className='stat-value text-primary'>{formatMoney(toData.IN)}</div>
