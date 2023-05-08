@@ -46,13 +46,18 @@ export function Calendar({ data, t }: { data: Invoice[]; t: { [k: string]: strin
               <option value={InvoiceType.IN}>{t.IN}</option>
               <option value={InvoiceType.OUT}>{t.OUT}</option>
               <option value={'BALANCE'}>{t.BALANCE}</option>
-            </select>{' '}
+            </select>
           </label>
         </div>
       </div>
       <div className='grid grid-cols-7 gap-4 text-center py-4'>
         {week.map((day) => (
-          <div key={`d-${day}`}>{dayjs(date).startOf('week').add(day, 'day').format('ddd')}</div>
+          <div key={`d-${day}`}>
+            {dayjs(date)
+              .startOf('week')
+              .add(day - 1, 'day')
+              .format('ddd')}
+          </div>
         ))}
         {grids.map((day, i) => (
           <div
