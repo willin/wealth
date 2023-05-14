@@ -44,7 +44,7 @@ export default async function Page({ params: { year, month, day, lang } }: Conte
       <div className='flex justify-between py-3'>
         <Link href={`/${lang}/${prev.format('YYYY/M/D')}`} className='mx-4'>
           <svg
-            className='fill-current h-12 w-12'
+            className='fill-current h-9 w-9'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
@@ -52,12 +52,12 @@ export default async function Page({ params: { year, month, day, lang } }: Conte
             <path d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'></path>
           </svg>
         </Link>
-        <h1 className='text-center text-5xl font-bold'>
+        <h1 className='text-center text-4xl font-bold'>
           {year}-{month.padStart(2, '0')}-{day.padStart(2, '0')}
         </h1>
         <Link href={`/${lang}/${next.format('YYYY/M/D')}`} className='mx-4'>
           <svg
-            className='fill-current h-12 w-12'
+            className='fill-current h-9 w-9'
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
