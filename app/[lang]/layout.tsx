@@ -51,7 +51,7 @@ export default function RootLayout({ children, params }: { children: React.React
       <body>
         <BackgroundImage />
         <MainHeader />
-        <div className='container mx-auto shadow bg-neutral/70 p-2 sm:p-4 mb-20'>
+        <div className='container mx-auto shadow bg-base-100/70 p-2 sm:p-4 mb-20'>
           {children}
           <footer className='text-center text-sm'>
             &copy; <a href='https://willin.wang'>Willin Wang</a>
