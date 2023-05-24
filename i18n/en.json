@@ -27,7 +27,8 @@
     "CLOTHES": "Clothes",
     "DAILY": "Daily",
     "FAMILY": "Family",
-    "MEDICAL": "Medical"
+    "MEDICAL": "Medical",
+    "OPENSOURCE": "Open Source"
   },
   "method": {
     "ALIPAY": "Alipay",

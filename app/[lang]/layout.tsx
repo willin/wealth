@@ -51,10 +51,26 @@ export default function RootLayout({ children, params }: { children: React.React
       <body>
         <BackgroundImage />
         <MainHeader />
-        <div className='container mx-auto shadow bg-neutral/70 p-2 sm:p-4 mb-20'>
+        <div className='container mx-auto shadow bg-base-100/70 p-2 sm:p-4 mb-20'>
           {children}
-          <footer className='text-center text-sm'>
-            &copy; <a href='https://willin.wang'>Willin Wang</a>
+          <footer className='text-center text-sm mt-4'>
+            <p>
+              <a href='https://github.com/willin' target='_blank' className='inline-block'>
+                <img
+                  src='https://img.shields.io/github/followers/willin.svg?style=social&amp;label=Followers'
+                  alt='Github Followers'
+                />
+              </a>{' '}
+              <a href='https://github.com/willin/wealth' target='_blank' className='inline-block'>
+                <img alt='GitHub Repo stars' src='https://img.shields.io/github/stars/willin/wealth?style=social' />
+              </a>
+            </p>
+            <p>
+              &copy;{' '}
+              <a href='https://willin.wang' target='_blank'>
+                Willin Wang
+              </a>
+            </p>{' '}
           </footer>
         </div>
 

@@ -1,5 +1,4 @@
 'use client';
-import clsx from 'classnames';
 import { Pagination } from '@/db/types';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';

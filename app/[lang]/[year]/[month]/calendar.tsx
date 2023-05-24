@@ -5,7 +5,6 @@ import 'dayjs/locale/en';
 import 'dayjs/locale/zh';
 import { useParams } from 'next/navigation';
 import { Invoice, InvoiceType } from '@/db/types';
-import { formatMoney } from '@/app/[lang]/helper';
 import Link from 'next/link';
 import { GridSpan } from '../stats';
 import { useState } from 'react';
