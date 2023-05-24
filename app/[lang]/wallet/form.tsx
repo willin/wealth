@@ -241,11 +241,11 @@ export default function Form({
               <input
                 type='date'
                 className={'input input-bordered max-w-[260px]'}
-                onChange={(value) => {
-                  setItem({ ...item, date: dayjs(value as Date).format('YYYY-MM-DD') });
+                onChange={(e) => {
+                  setItem({ ...item, date: e.target.value });
                 }}
                 disabled={isLoading}
-                value={item.date}
+                value={item.date as string}
               />
             </div>
             <div className='form-control'>
