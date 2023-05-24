@@ -1,11 +1,8 @@
 'use client';
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
 import { Invoice, InvoiceInCategory, InvoiceMethod, InvoiceOutCategory, InvoiceType } from '@/db/types';
 import dayjs from 'dayjs';
 import clsx from 'classnames';
 import { useEffect, useState } from 'react';
-import DatePicker from 'react-date-picker';
 
 async function fetcher<JSON = any>(input: RequestInfo, init?: RequestInit): Promise<JSON> {
   const res = await fetch(input, init);
@@ -241,16 +238,14 @@ export default function Form({
               </label>
             </div>
             <div className='form-control'>
-              <DatePicker
+              <input
+                type='date'
                 className={'input input-bordered max-w-[260px]'}
                 onChange={(value) => {
                   setItem({ ...item, date: dayjs(value as Date).format('YYYY-MM-DD') });
                 }}
                 disabled={isLoading}
                 value={item.date}
-                locale={locale}
-                format='y-MM-dd'
-                clearIcon={null}
               />
             </div>
             <div className='form-control'>

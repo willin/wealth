@@ -34,6 +34,8 @@ export const InvoiceOutCategory = [
   'MEDICAL',
   // 红包打赏
   'DONATE',
+  // 开源公益
+  'OPENSOURCE',
   // 其他
   'OTHERS'
 ];
