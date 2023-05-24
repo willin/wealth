@@ -28,7 +28,7 @@
     "DAILY": "日用百货",
     "FAMILY": "家庭",
     "MEDICAL": "医疗健康",
-    "OPENSOURCE": "开源、公益、服务"
+    "OPENSOURCE": "开源/服务"
   },
   "method": {
     "ALIPAY": "支付宝",
