@@ -240,7 +240,7 @@ export default function Form({
             <div className='form-control'>
               <input
                 type='date'
-                className={'input input-bordered w-full'}
+                className={'input input-bordered'}
                 onChange={(e) => {
                   setItem({ ...item, date: e.target.value });
                 }}
