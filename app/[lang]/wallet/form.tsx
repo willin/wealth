@@ -240,12 +240,13 @@ export default function Form({
             <div className='form-control'>
               <input
                 type='date'
-                className={'input input-bordered max-w-[260px]'}
+                className={'input input-bordered'}
                 onChange={(e) => {
                   setItem({ ...item, date: e.target.value });
                 }}
                 disabled={isLoading}
                 value={item.date as string}
+                pattern='\d{4}-\d{2}-\d{2}'
               />
             </div>
             <div className='form-control'>
