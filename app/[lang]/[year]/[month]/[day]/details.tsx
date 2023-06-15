@@ -26,13 +26,15 @@ export function TableDailyView({
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr className='hover' key={item.id} id={`id-${item.id!}`}>
-              <td>{categories.find((x) => x.name === item.category)?.label}</td>
-              <td>{formatMoney(item.amount)}</td>
-              <td>{item.desc}</td>
-            </tr>
-          ))}
+          {data
+            .sort((x, y) => (x.amount < y.amount ? 1 : -1))
+            .map((item) => (
+              <tr className='hover' key={item.id} id={`id-${item.id!}`}>
+                <td>{categories.find((x) => x.name === item.category)?.label}</td>
+                <td>{formatMoney(item.amount)}</td>
+                <td>{item.desc}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

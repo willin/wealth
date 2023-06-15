@@ -148,6 +148,8 @@ export function PieView({
       detail[item.type as InvoiceType].push(nd as any as Invoice);
     }
   });
+  detail.IN = detail.IN.sort((x, y) => (x.amount < y.amount ? 1 : -1));
+  detail.OUT = detail.OUT.sort((x, y) => (x.amount < y.amount ? 1 : -1));
 
   return (
     <div className='flex lg:flex-row flex-col mb-10 flex-wrap'>
