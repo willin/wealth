@@ -21,7 +21,7 @@ export function TableDailyView({
           <tr>
             <th>{t.category}</th>
             <th>{t.amount}</th>
-            <th>{t.desc}</th>
+            <th>{t.description}</th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@ export function TableDailyView({
                   {categories.find((x) => x.name === item.category)?.label}
                 </td>
                 <td>{formatMoney(item.amount)}</td>
-                <td>{item.desc}</td>
+                <td>{item.description}</td>
               </tr>
             ))}
         </tbody>

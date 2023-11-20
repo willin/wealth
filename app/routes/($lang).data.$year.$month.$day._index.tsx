@@ -58,7 +58,7 @@ export default function DayPage() {
     BALANCE: t('type.BALANCE'),
     category: t('invoice.category'),
     amount: t('invoice.amount'),
-    desc: t('invoice.desc')
+    desc: t('invoice.description')
   };
   const date = new Date(+year, +month - 1, +day);
   const prev = dayjs(date).add(-1, 'day');

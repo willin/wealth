@@ -3,6 +3,7 @@ import { buildSqlSearch, getPaginator } from 'server/utils/transform';
 import type { Env } from '../env';
 import type { IDatabaseService } from './database';
 import type { InOutBalance, Invoice, InvoiceType, Pagination } from '~/types';
+import { escapeId } from 'sqlstring';
 
 export interface IInvoiceService {
   // Public
@@ -168,7 +169,7 @@ export class InvoiceService implements IInvoiceService {
     return this.#db.query<Invoice>(sql, [limit, (page - 1) * limit]);
   }
 
-  countInvoices(prams: Partial<Invoice> & Pagination): Promise<number> {
+  countInvoices(params: Partial<Invoice> & Pagination): Promise<number> {
     const sql = `SELECT COUNT(id) as count FROM invoices WHERE 1 = 1 ${buildSqlSearch(
       params
     )}`;
