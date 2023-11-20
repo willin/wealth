@@ -55,6 +55,9 @@ export const dict: I18nDict = {
     alipay_account: 'Fund Real Account',
     douyin: 'Douyin',
     wechat: 'Wechat Public',
-    social: 'Microblog'
+    social: 'Microblog',
+    yearly: 'Yearly',
+    monthly: 'Monthly',
+    daily: 'Daily'
   }
 };

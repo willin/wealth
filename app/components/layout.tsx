@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import BackgroundImage from './background';
 import Bootstrap from './bootstrap';
 import MainHeader from './header';
+import { BottomNav } from './bottom';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -42,6 +43,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </p>
         </footer>
       </main>
+      <BottomNav />
     </>
   );
 }

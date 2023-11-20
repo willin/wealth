@@ -92,3 +92,11 @@ export const InvoiceIndexes = ['date', 'type', 'category', 'amount', 'id'];
 export function formatMoney(n: number) {
   return n.toLocaleString('zh-CN', { style: 'currency', currency: 'CNY' });
 }
+
+export interface iBalance {
+  IN: number;
+  OUT: number;
+  BALANCE: number;
+  date?: string;
+  category?: string;
+}

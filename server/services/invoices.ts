@@ -95,7 +95,7 @@ export class InvoiceService implements IInvoiceService {
   }): Promise<InOutBalance> {
     const { year, month } = params;
     const sql =
-      "SELECT strftime('%y-%m', `date`) as `month`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `month`,`type`";
+      'SELECT substr(`date`,0,8) as `month`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `month`,`type`';
     const enddate = new Date(year, month - 1, 1);
     const startdate = dayjs(enddate).add(-1, 'month').format('YYYY-MM-DD');
     const records = await this.#db.query<Invoice>(sql, [
@@ -113,7 +113,7 @@ export class InvoiceService implements IInvoiceService {
   getYearData(params: { year: number }): Promise<Invoice[]> {
     const { year } = params;
     const sql =
-      "SELECT strftime('%y-%m', `date`) as `date`,SUM(`amount`) as `amount`,`type`,`category` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY strftime('%y-%m', `date`),`type`,`category`";
+      'SELECT substr(`date`,0,8) as `date`,SUM(`amount`) as `amount`,`type`,`category` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY substr(`date`,0,8),`type`,`category`';
     const startdate = new Date(year, 0, 1);
     const enddate = new Date(year + 1, 0, 1);
     return this.#db.query<Invoice>(sql, [
@@ -125,7 +125,7 @@ export class InvoiceService implements IInvoiceService {
   async getLastYearData(params: { year: number }): Promise<InOutBalance> {
     const { year } = params;
     const sql =
-      "SELECT strftime('%y', `date`) as `year`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `year`,`type`";
+      'SELECT substr(`date`,0,5) as `year`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `year`,`type`';
     const startdate = new Date(year - 1, 0, 1);
     const enddate = new Date(year, 0, 1);
     const records = await this.#db.query<Invoice>(sql, [

@@ -55,6 +55,9 @@ export const dict: I18nDict = {
     alipay_account: '基金实盘',
     douyin: '抖音号',
     wechat: '微信公众号',
-    social: '微博客'
+    social: '微博客',
+    yearly: '年视图',
+    monthly: '月视图',
+    daily: '日视图'
   }
 };
