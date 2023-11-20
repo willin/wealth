@@ -1,0 +1,8 @@
+kv_namespaces = [
+  { binding = "CACHE", id = "cf6877e3267a403d8965e115c13544bc" }
+]
+
+[[d1_databases]]
+binding = "RECORDS" # i.e. available in your Worker on env.DB
+database_name = "dns"
+database_id = "20204091-f55f-430d-a100-2292d8ea305a" 
