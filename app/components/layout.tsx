@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <BackgroundImage />
       <MainHeader />
-      <main className='w-[720px] max-w-full mx-auto shadow bg-base-100/90 p-2 sm:p-4 mb-20'>
+      <main className='w-[960px] max-w-full mx-auto shadow bg-base-100/90 p-2 sm:p-4 mb-20'>
         <article className='prose'>{children}</article>
         <Bootstrap />
         <footer className='text-center text-sm mt-4'>
@@ -24,13 +24,13 @@ export default function Layout({ children }: { children: ReactNode }) {
               />
             </a>{' '}
             <a
-              href='https://github.com/willin/domain'
+              href='https://github.com/willin/wealth'
               target='_blank'
               className='inline-block'
               rel='noreferrer'>
               <img
                 alt='GitHub Repo stars'
-                src='https://img.shields.io/github/stars/willin/domain?style=social'
+                src='https://img.shields.io/github/stars/willin/wealth?style=social'
               />
             </a>
           </p>

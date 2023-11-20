@@ -46,7 +46,8 @@ export const dict: I18nDict = {
     all: 'All',
     login: 'Sign In',
     forbidden: 'Forbidden',
-    go_back: 'Go Back'
+    go_back: 'Go Back',
+    this_year: 'This year'
   },
   meta: {
     brief: 'To be Willin is to be willing.',

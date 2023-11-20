@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { buildSqlSearch, getPaginator } from 'server/utils/transform';
 import type { Env } from '../env';
 import type { IDatabaseService } from './database';
@@ -48,7 +49,10 @@ export class InvoiceService implements IInvoiceService {
       'SELECT `id`,`date`,`amount`,`type`,`category`,`desc` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 ORDER BY `amount` DESC';
     const startdate = new Date(year, month - 1, day);
     const enddate = dayjs(startdate).add(1, 'day').format('YYYY-MM-DD');
-    return this.#db.query<Invoice>(sql, [startdate, enddate]);
+    return this.#db.query<Invoice>(sql, [
+      dayjs(startdate).format('YYYY-MM-DD'),
+      enddate
+    ]);
   }
 
   async getLastDayData(params: {
@@ -61,7 +65,10 @@ export class InvoiceService implements IInvoiceService {
       'SELECT `date`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `date`,`type`';
     const enddate = new Date(year, month - 1, day);
     const startdate = dayjs(enddate).add(-1, 'day').format('YYYY-MM-DD');
-    const records = await this.#db.query<Invoice>(sql, [startdate, enddate]);
+    const records = await this.#db.query<Invoice>(sql, [
+      startdate,
+      dayjs(enddate).format('YYYY-MM-DD')
+    ]);
     const data = { IN: 0, OUT: 0, BALANCE: 0 };
     records.forEach((item) => {
       data[item.type as InvoiceType] += item.amount;
@@ -76,7 +83,10 @@ export class InvoiceService implements IInvoiceService {
       'SELECT `date`,SUM(`amount`) as `amount`,`type`,`category` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `date`,`type`,`category`';
     const startdate = new Date(year, month - 1, 1);
     const enddate = new Date(year, month, 1);
-    return this.#db.query<Invoice>(sql, [startdate, enddate]);
+    return this.#db.query<Invoice>(sql, [
+      dayjs(startdate).format('YYYY-MM-DD'),
+      dayjs(enddate).format('YYYY-MM-DD')
+    ]);
   }
 
   async getLastMonthData(params: {
@@ -88,7 +98,10 @@ export class InvoiceService implements IInvoiceService {
       "SELECT strftime('%y-%m', `date`) as `month`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `month`,`type`";
     const enddate = new Date(year, month - 1, 1);
     const startdate = dayjs(enddate).add(-1, 'month').format('YYYY-MM-DD');
-    const records = await this.#db.query<Invoice>(sql, [startdate, enddate]);
+    const records = await this.#db.query<Invoice>(sql, [
+      dayjs(startdate).format('YYYY-MM-DD'),
+      enddate
+    ]);
     const data = { IN: 0, OUT: 0, BALANCE: 0 };
     records.forEach((item) => {
       data[item.type as InvoiceType] += item.amount;
@@ -103,7 +116,10 @@ export class InvoiceService implements IInvoiceService {
       "SELECT strftime('%y-%m', `date`) as `date`,SUM(`amount`) as `amount`,`type`,`category` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY strftime('%y-%m', `date`),`type`,`category`";
     const startdate = new Date(year, 0, 1);
     const enddate = new Date(year + 1, 0, 1);
-    return this.#db.query<Invoice>(sql, [startdate, enddate]);
+    return this.#db.query<Invoice>(sql, [
+      dayjs(startdate).format('YYYY-MM-DD'),
+      dayjs(enddate).format('YYYY-MM-DD')
+    ]);
   }
 
   async getLastYearData(params: { year: number }): Promise<InOutBalance> {
@@ -112,7 +128,11 @@ export class InvoiceService implements IInvoiceService {
       "SELECT strftime('%y', `date`) as `year`,SUM(`amount`) as `amount`,`type` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 GROUP BY `year`,`type`";
     const startdate = new Date(year - 1, 0, 1);
     const enddate = new Date(year, 0, 1);
-    const records = await this.#db.query<Invoice>(sql, [startdate, enddate]);
+    const records = await this.#db.query<Invoice>(sql, [
+      dayjs(startdate).format('YYYY-MM-DD'),
+      dayjs(enddate).format('YYYY-MM-DD')
+    ]);
+
     const data = { IN: 0, OUT: 0, BALANCE: 0 };
     records.forEach((item) => {
       data[item.type as InvoiceType] += item.amount;

@@ -46,7 +46,8 @@ export const dict: I18nDict = {
     all: '全部',
     login: '登录',
     forbidden: '禁止访问',
-    go_back: '返回'
+    go_back: '返回',
+    this_year: '今年'
   },
   meta: {
     brief: '人生最大的冒险就是不冒险。',

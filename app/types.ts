@@ -88,3 +88,7 @@ export interface InOutBalance {
 }
 
 export const InvoiceIndexes = ['date', 'type', 'category', 'amount', 'id'];
+
+export function formatMoney(n: number) {
+  return n.toLocaleString('zh-CN', { style: 'currency', currency: 'CNY' });
+}
