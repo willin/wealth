@@ -6,7 +6,7 @@ export const dict: I18nDict = {
     category: 'Category',
     amount: 'Amount',
     method: 'Payment Method',
-    desc: 'Description',
+    description: 'Description',
     note: 'Remark'
   },
   type: {

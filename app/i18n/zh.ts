@@ -6,7 +6,7 @@ export const dict: I18nDict = {
     category: '分类',
     amount: '金额',
     method: '支付方式',
-    desc: '项目说明',
+    description: '项目说明',
     note: '备注'
   },
   type: {

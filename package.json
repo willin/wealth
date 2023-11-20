@@ -16,12 +16,14 @@
     "@remix-run/cloudflare-pages": "^2.0.1",
     "@remix-run/react": "^2.0.1",
     "classnames": "^2.3.2",
+    "dayjs": "^1.11.10",
     "isbot": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-auth": "^3.5.1",
     "remix-auth-sso": "^0.0.2",
     "remix-i18n": "^1.0.1",
+    "sqlstring": "^2.3.3",
     "zod": "^3.22.2"
   },
   "devDependencies": {

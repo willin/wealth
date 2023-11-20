@@ -5,7 +5,7 @@ CREATE TABLE `invoices`  (
   `category` TEXT NOT NULL DEFAULT '',
   `amount` DECIMAL(12, 2) NOT NULL DEFAULT 0,
   `method` TEXT NOT NULL DEFAULT '',
-  `desc` TEXT NOT NULL DEFAULT '',
+  `description` TEXT NOT NULL DEFAULT '',
   `note` TEXT NOT NULL DEFAULT ''
 );
 
