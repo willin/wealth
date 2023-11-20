@@ -193,7 +193,7 @@ export class InvoiceService implements IInvoiceService {
 
   updateInvoice(id: string, params: Partial<Invoice>): Promise<boolean> {
     return this.#db.execute(
-      'UPDATE invoices SET type=?2, date=?3, category=?4, amount=?5, method=?6, node=?7, description=?8 WHERE id = ?1',
+      'UPDATE invoices SET type=?2, date=?3, category=?4, amount=?5, method=?6, note=?7, description=?8 WHERE id = ?1',
       [
         id,
         params.type,

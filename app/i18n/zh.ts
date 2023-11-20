@@ -2,6 +2,7 @@ import type { I18nDict } from 'remix-i18n';
 
 export const dict: I18nDict = {
   invoice: {
+    id: 'ID',
     date: '日期',
     category: '分类',
     amount: '金额',
@@ -43,6 +44,7 @@ export const dict: I18nDict = {
     total: '历史总计',
     operation: '操作',
     edit: '编辑',
+    save: '保存',
     all: '全部',
     login: '登录',
     forbidden: '禁止访问',

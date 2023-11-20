@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import clsx from 'classnames';
-import { type LoaderFunction, json } from '@remix-run/cloudflare';
+import { type LoaderFunction, json, redirect } from '@remix-run/cloudflare';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 import { useI18n } from 'remix-i18n';
 import { FilterType } from '~/components/atom/filters';
@@ -9,6 +9,16 @@ import { LocaleLink } from '~/components/link';
 import { InvoiceType, formatMoney } from '~/types';
 
 export const loader: LoaderFunction = async ({ context, request, params }) => {
+  const user = await context.services.auth.authenticator.isAuthenticated(
+    request,
+    {
+      failureRedirect: '/'
+    }
+  );
+  if (user?.type !== 'admin') {
+    return redirect('/');
+  }
+
   const url = new URL(request.url);
   const searchParams = Object.fromEntries(url.searchParams.entries()) || {};
   const { invoice } = context.services;

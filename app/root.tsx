@@ -55,6 +55,7 @@ export const loader: LoaderFunction = async ({ request, context, params }) => {
     defaultLightTheme;
   const user =
     await context.services.auth.authenticator.isAuthenticated(request);
+
   return json({ theme, user });
 };
 
