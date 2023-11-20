@@ -9,8 +9,6 @@
     "start:dev": "wrangler pages dev --compatibility-date=2023-08-15 ./public --local",
     "start": "wrangler pages dev --compatibility-date=2023-08-15 ./public",
     "typecheck": "tsc",
-    "db:list": "wrangler d1 migrations list dns",
-    "db:apply": "npx wrangler d1 migrations apply dns",
     "prepare": "husky install"
   },
   "dependencies": {

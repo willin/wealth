@@ -1,11 +1,13 @@
 import type { Env } from './env';
 import type { IAuthService } from './services/auth';
+import type { IInvoiceService } from './services/invoices';
 
 declare global {
   namespace RemixServer {
     export { Env };
     export interface Services {
       auth: IAuthService;
+      invoice: IInvoiceService;
     }
   }
 }
