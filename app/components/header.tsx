@@ -7,7 +7,7 @@ export default function MainHeader() {
     <header className='sticky top-0 flex justify-center w-full z-[9999] opacity-90 hover:opacity-100 bg-base-100 mb-4'>
       <div className='navbar bg-base-100'>
         <div className='navbar-start'>
-          <LocaleLink to='' className='btn btn-ghost normal-case text-xl'>
+          <LocaleLink to='/' className='btn btn-ghost normal-case text-xl'>
             Willin Wealth
           </LocaleLink>
         </div>

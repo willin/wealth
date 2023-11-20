@@ -1,12 +1,22 @@
 import dayjs from 'dayjs';
-import { json, type LoaderFunction } from '@remix-run/cloudflare';
+import {
+  json,
+  type MetaFunction,
+  type LoaderFunction,
+  redirect
+} from '@remix-run/cloudflare';
 import { useLoaderData, useParams } from '@remix-run/react';
 import { useI18n } from 'remix-i18n';
 import { LocaleLink } from '~/components/link';
-import { PieView } from '~/components/pie';
-import { MainStats } from '~/components/stats';
-import { YearView } from '~/components/year';
+import { PieView } from '~/components/atom/pie';
+import { MainStats } from '~/components/atom/stats';
+import { YearView } from '~/components/atom/year';
 import { InvoiceInCategory, InvoiceOutCategory } from '~/types';
+
+export const meta: MetaFunction = ({ params }) => {
+  const { year } = params;
+  return [{ title: `${year} | Willin Wealth` }];
+};
 
 export const loader: LoaderFunction = async ({ context, params, request }) => {
   const { year } = params;
@@ -15,21 +25,19 @@ export const loader: LoaderFunction = async ({ context, params, request }) => {
     return redirect('/');
   }
   const { invoice } = context.services;
-  const [yearData, lastYearData, totalData] = await Promise.all([
+  const [yearData, lastYearData] = await Promise.all([
     invoice.getYearData({ year: +year }),
-    invoice.getLastYearData({ year: +year }),
-    invoice.getTotalData()
+    invoice.getLastYearData({ year: +year })
   ]);
   return json({
     yearData,
-    lastYearData,
-    totalData
+    lastYearData
   });
 };
 
 export default function YearPage() {
   const { t } = useI18n();
-  const { yearData, lastYearData, totalData } = useLoaderData<typeof loader>();
+  const { yearData, lastYearData } = useLoaderData<typeof loader>();
   const { year } = useParams();
   const date = new Date(+year, 0, 1);
 
@@ -55,7 +63,7 @@ export default function YearPage() {
   return (
     <div>
       <div className='flex justify-between py-3'>
-        <LocaleLink to={`/${prev.year()}`} className='mx-4'>
+        <LocaleLink to={`/data/${prev.year()}`} className='mx-4'>
           <svg
             className='fill-current h-12 w-12'
             xmlns='http://www.w3.org/2000/svg'
@@ -66,7 +74,7 @@ export default function YearPage() {
           </svg>
         </LocaleLink>
         <h1 className='text-center text-5xl font-bold'>{year}</h1>
-        <LocaleLink href={`/${next.year()}`} className='mx-4'>
+        <LocaleLink to={`/data/${next.year()}`} className='mx-4'>
           <svg
             className='fill-current h-12 w-12'
             xmlns='http://www.w3.org/2000/svg'
@@ -85,16 +93,6 @@ export default function YearPage() {
         categories={categories}
         t={types}
         summary={compareYearData}
-      />
-
-      <div className='flex justify-center py-3'>
-        <h2 className='text-center text-3xl font-bold'>{t('common.total')}</h2>
-      </div>
-      <MainStats
-        toData={totalData}
-        lastData={lastYearData}
-        t={types}
-        hideCompare
       />
     </div>
   );

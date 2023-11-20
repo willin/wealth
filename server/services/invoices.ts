@@ -99,8 +99,8 @@ export class InvoiceService implements IInvoiceService {
     const enddate = new Date(year, month - 1, 1);
     const startdate = dayjs(enddate).add(-1, 'month').format('YYYY-MM-DD');
     const records = await this.#db.query<Invoice>(sql, [
-      dayjs(startdate).format('YYYY-MM-DD'),
-      enddate
+      startdate,
+      dayjs(enddate).format('YYYY-MM-DD')
     ]);
     const data = { IN: 0, OUT: 0, BALANCE: 0 };
     records.forEach((item) => {

@@ -12,7 +12,7 @@ export function BottomNav({ lang }: { lang: Locale }) {
   return (
     <div className='btm-nav text-primary text-sm z-50'>
       <LocaleLink
-        to={`/${year}`}
+        to={`/data/${year}`}
         className={clsx({
           active: params.year && !params.month && !params.day,
           'text-primary-focus': params.year && !params.month && !params.day
@@ -32,7 +32,7 @@ export function BottomNav({ lang }: { lang: Locale }) {
         <span className='btm-nav-label'>年视图</span>
       </LocaleLink>
       <LocaleLink
-        to={`/${year}/${month}`}
+        to={`/data/${year}/${month}`}
         className={clsx({
           active: params.month && !params.day,
           'text-primary-focus': params.month && !params.day
@@ -47,7 +47,7 @@ export function BottomNav({ lang }: { lang: Locale }) {
         <span className='btm-nav-label'>月视图</span>
       </LocaleLink>
       <LocaleLink
-        to={`/${year}/${month}/${day}`}
+        to={`/data/${year}/${month}/${day}`}
         className={clsx({
           active: params.day,
           'text-primary-focus': params.day

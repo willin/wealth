@@ -14,7 +14,7 @@ import { type Invoice, InvoiceType, formatMoney } from '~/types';
 import { useParams } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import { GridSpan } from './stats';
-import { LocaleLink } from './link';
+import { LocaleLink } from '../link';
 
 function useWindowWidth() {
   const [width, setWidth] = useState(
@@ -114,7 +114,7 @@ export function YearView({
       <div className='grid grid-cols-4 gap-4 text-center py-4'>
         {grids.map((day) => (
           <div key={day.date}>
-            <LocaleLink to={`/${dayjs(day.date).format(`YYYY/M`)}`}>
+            <LocaleLink to={`/data/${dayjs(day.date).format(`YYYY/M`)}`}>
               <p>{dayjs(day.date).format('MMM')}</p>
               <GridSpan value={day[showType]} />
             </LocaleLink>

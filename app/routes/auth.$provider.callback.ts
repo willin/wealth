@@ -10,7 +10,7 @@ export const loader: LoaderFunction = async ({ request, context, params }) => {
     provider,
     request,
     {
-      successRedirect: '/dashboard',
+      successRedirect: '/wallet',
       failureRedirect: returnPath
     }
   );
