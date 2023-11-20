@@ -12,7 +12,7 @@ export const loader: LoaderFunction = async ({ context, request, params }) => {
   const user = await context.services.auth.authenticator.isAuthenticated(
     request,
     {
-      failureRedirect: '/'
+      failureRedirect: '/auth/sso'
     }
   );
   if (user?.type !== 'admin') {

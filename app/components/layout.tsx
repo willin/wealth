@@ -3,8 +3,12 @@ import BackgroundImage from './background';
 import Bootstrap from './bootstrap';
 import MainHeader from './header';
 import { BottomNav } from './bottom';
+import { LocaleLink } from './link';
+import { useI18n } from 'remix-i18n';
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const { t } = useI18n();
+
   return (
     <>
       <BackgroundImage />
@@ -39,7 +43,9 @@ export default function Layout({ children }: { children: ReactNode }) {
             &copy;{' '}
             <a href='https://willin.wang' target='_blank' rel='noreferrer'>
               Willin Wang
-            </a>
+            </a>{' '}
+            &nbsp;
+            <LocaleLink to='/wallet'>{t('common.login')}</LocaleLink>
           </p>
         </footer>
       </main>

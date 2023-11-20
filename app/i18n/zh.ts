@@ -46,7 +46,7 @@ export const dict: I18nDict = {
     edit: '编辑',
     save: '保存',
     all: '全部',
-    login: '登录',
+    login: '管理员登录',
     forbidden: '禁止访问',
     go_back: '返回',
     this_year: '今年',
