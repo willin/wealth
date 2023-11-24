@@ -23,8 +23,38 @@ export function StatComp({ to, last: l }: { to: number; last: number }) {
         'text-primary-focus': diff > 0,
         'text-secondary-focus': diff <= 0
       })}>
-      {diff > 0 ? '↗︎' : '↘︎'} {formatMoney(diff)} (
-      {Math.ceil((diff * 100) / last)}%)
+      <div className='inline-flex p-1' style={{ verticalAlign: 'sub' }}>
+        {diff > 0 ? (
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-4 w-4 text-red-600'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'>
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-4 w-4 text-green-600'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'>
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M13 17h8m0 0V9m0 8l-8-8-4 4-6-6'
+            />
+          </svg>
+        )}
+      </div>{' '}
+      {formatMoney(diff)} ({Math.ceil((diff * 100) / last)}%)
     </div>
   );
 }
