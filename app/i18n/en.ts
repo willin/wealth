@@ -50,7 +50,9 @@ export const dict: I18nDict = {
     forbidden: 'Forbidden',
     go_back: 'Go Back',
     this_year: 'This year',
-    confirm_logout: 'Are you sure to logout?'
+    confirm_logout: 'Are you sure to logout?',
+    adblock: 'Adblock Detected',
+    adblock_message: 'Please disable adblock to continue using this site.'
   },
   meta: {
     brief: 'To be Willin is to be willing.',

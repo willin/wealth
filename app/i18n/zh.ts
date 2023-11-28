@@ -50,7 +50,9 @@ export const dict: I18nDict = {
     forbidden: '禁止访问',
     go_back: '返回',
     this_year: '今年',
-    confirm_logout: '确定要退出登录吗？'
+    confirm_logout: '确定要退出登录吗？',
+    adblock: '发现广告拦截插件',
+    adblock_message: '请关闭广告拦截插件以继续使用本站服务。'
   },
   meta: {
     brief: '人生最大的冒险就是不冒险。',
