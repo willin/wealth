@@ -24,20 +24,26 @@ import { i18nConfig } from './i18n';
 
 export const meta: MetaFunction = () => {
   return [
+    { charSet: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width,initial-scale=1' },
     { title: 'Willin Wang Wallet' },
     { name: 'description', content: "A Willin Wang's Work" },
     {
       name: 'keywords',
       content: ['Next.js', 'React', 'JavaScript', 'Willin Wang'].join(', ')
     },
-    { name: 'author', content: 'Willin Wang' }
+    { name: 'author', content: 'Willin Wang' },
+    { name: 'apple-touch-fullscreen', content: 'yes' },
+    { name: 'apple-mobile-web-app-capable', content: 'yes' },
+    { name: 'theme-color', content: '#FF8E05' }
   ];
 };
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
   { rel: 'shortcut icon', href: '/favicon.ico', type: 'image/ico' },
-  { rel: 'icon', href: '/favicon.png', type: 'image/png' }
+  { rel: 'icon', href: '/favicon.png', type: 'image/png' },
+  { rel: 'manifest', href: '/manifest.json' }
 ];
 
 export const loader: LoaderFunction = async ({ request, context, params }) => {
@@ -67,8 +73,6 @@ export default function App() {
     <ThemeProvider specifiedTheme={theme}>
       <html lang={i18n.locale()} data-theme={theme}>
         <head>
-          <meta charSet='utf-8' />
-          <meta name='viewport' content='width=device-width,initial-scale=1' />
           <Meta />
           <Links />
         </head>
