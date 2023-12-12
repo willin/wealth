@@ -39,6 +39,7 @@ export class AuthService implements IAuthService {
         name: 'sid',
         httpOnly: true,
         secure: env.CF_PAGES === 'production',
+        maxAge: 86400 * 30,
         sameSite: 'lax',
         path: '/',
         secrets: [env.COOKIE_SESSION_SECRET]
