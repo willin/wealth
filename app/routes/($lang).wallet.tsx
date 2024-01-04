@@ -1,8 +1,8 @@
-import { Form, Outlet, useNavigate } from '@remix-run/react';
+import { Form, Outlet } from '@remix-run/react';
 import { useI18n } from 'remix-i18n';
+import { LocaleLink } from '~/components/link';
 
 export default function WalletLayout() {
-  const navigate = useNavigate();
   const { t } = useI18n();
 
   function confirmLogout(e: FormEvent<HTMLFormElement>) {
@@ -17,9 +17,7 @@ export default function WalletLayout() {
       <Outlet />
       <Form method='post' action='/api/logout'>
         <div className='text-center py-10'>
-          <button
-            className='btn btn-circle mr-4'
-            onDoubleClick={() => navigate(-1)}>
+          <LocaleLink to='/wallet' className='btn btn-circle mr-4'>
             <svg
               viewBox='0 0 512 512'
               className='fill-current'
@@ -35,7 +33,7 @@ export default function WalletLayout() {
                 d='M244 400L100 256l144-144M120 256h292'
               />
             </svg>
-          </button>
+          </LocaleLink>
           <button
             title={t('common.logout')}
             className='btn btn-circle'

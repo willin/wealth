@@ -52,7 +52,7 @@ export const action: ActionFunction = async ({ context, request, params }) => {
   const body = Object.fromEntries(formData.entries());
   if (params.id) {
     await invoice.updateInvoice(params.id, body);
-    return json({});
+    return redirect('/wallet');
   }
   await invoice.createInvoice(body);
   return redirect('/wallet');

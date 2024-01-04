@@ -54,9 +54,7 @@ export class AuthService implements IAuthService {
       }
     );
 
-    const callbackURL = `${url.protocol}//${url.hostname}${
-      ['80', '443', ''].includes(url.port) ? '' : `:${url.port}`
-    }/auth/sso/callback`;
+    const callbackURL = `${url.origin}/auth/sso/callback`;
     this.#authenticator.use(
       new SSOStrategy(
         {
