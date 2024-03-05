@@ -15,7 +15,6 @@ export const loader: LoaderFunction = async ({ context, request, params }) => {
       failureRedirect: '/auth/sso'
     }
   );
-  console.log(JSON.stringify(user, null, 2));
   if (user?.type !== 'admin') {
     return redirect('/');
   }
