@@ -47,7 +47,7 @@ export class InvoiceService implements IInvoiceService {
   }): Promise<Invoice[]> {
     const { year, month, day } = params;
     const sql =
-      'SELECT `id`,`date`,`amount`,`type`,`category`,`desc` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 ORDER BY `amount` DESC';
+      'SELECT `id`,`date`,`amount`,`type`,`category`,`description` FROM invoices WHERE `date` >= ?1 AND `date` < ?2 ORDER BY `amount` DESC';
     const startdate = new Date(year, month - 1, day);
     const enddate = dayjs(startdate).add(1, 'day').format('YYYY-MM-DD');
     return this.#db.query<Invoice>(sql, [
