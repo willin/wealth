@@ -4,5 +4,14 @@ Allow: /
 User-Agent: *
 Disallow: /images/
 
+User-agent: Amazonbot
+Disallow: /data/
+
+User-agent: Amazonbot
+Disallow: /en/data/
+
+User-agent: Amazonbot
+Disallow: /zh/data/
+
 Host: https://domain.willin.wang
 Sitemap: https://domain.willin.wang/sitemap.xml
